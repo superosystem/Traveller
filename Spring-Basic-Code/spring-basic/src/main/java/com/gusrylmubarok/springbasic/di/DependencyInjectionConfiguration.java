@@ -3,6 +3,7 @@ package com.gusrylmubarok.springbasic.di;
 import com.gusrylmubarok.springbasic.data.Bar;
 import com.gusrylmubarok.springbasic.data.Foo;
 import com.gusrylmubarok.springbasic.data.FooBar;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,7 +16,12 @@ import org.springframework.context.annotation.Configuration;
 public class DependencyInjectionConfiguration {
 
     @Bean
-    public Foo foo() {
+    public Foo fooFirst() {
+        return new Foo();
+    }
+
+    @Bean
+    public Foo fooSecond() {
         return new Foo();
     }
 
@@ -25,7 +31,7 @@ public class DependencyInjectionConfiguration {
     }
 
     @Bean
-    public FooBar fooBar(Foo foo, Bar bar) {
+    public FooBar fooBar(@Qualifier("fooSecond") Foo foo, Bar bar) {
         return new FooBar(foo, bar);
     }
 
