@@ -11,4 +11,4 @@ mvn archetype:generate \
 -DarchetypeGroupId=org.apache.maven.archetypes \
 -DarchetypeCatalog=internal
 ```
--
+- Setup Dependency via pom.xml
