@@ -33,6 +33,11 @@
       <artifactId>hibernate-jpamodelgen</artifactId>
       <version>${hibernate.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-c3p0</artifactId>
+      <version>${hibernate.version}</version>
+    </dependency>
     <!-- Unit Test -->
     <dependency>
       <groupId>junit</groupId>
@@ -61,7 +66,7 @@
     <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
-      <version>42.3.3</version>
+      <version>42.3.2</version>
       <scope>runtime</scope>
     </dependency>
     <!-- Database pooling connection -->
@@ -91,7 +96,7 @@
           <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.3.3</version>
+            <version>42.3.2</version>
             <scope>runtime</scope>
           </dependency>
         </dependencies>
