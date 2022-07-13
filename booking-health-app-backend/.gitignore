@@ -1,3 +1,7 @@
+my_db
+my_db/
+.my_db
+
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
