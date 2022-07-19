@@ -1,0 +1,21 @@
+version: '2.6'
+
+services:
+  database:
+    container_name: 'perpustakaan-rest'
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: '${DB_NAME}'
+      MYSQL_USER: '${DB_USER}'
+      MYSQL_PASSWORD: '${DB_PASSWD}'
+      MYSQL_ROOT_PASSWORD: '${DB_ROOT_PASSWD}'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - "${PWD}/local_db:/var/lib/mysql"
+
+volumes:
+  local_db:
