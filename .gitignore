@@ -35,6 +35,8 @@ build/
 
 ### Env ###
 .env
+.env/
+.env/
 
 ### Database Local ###
 local_db
