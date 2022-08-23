@@ -1,5 +1,7 @@
 # Perpustakaan RESTful API
 
+[![CI Perpustakaan API](https://github.com/gusrylmubarok/perpustakaan-spring-rest/actions/workflows/maven.yml/badge.svg)](https://github.com/gusrylmubarok/perpustakaan-spring-rest/actions/workflows/maven.yml)
+
 <p align="justify">
 This is a RESTful API for Library Management powered by Spring Boot, Java that provide the main function you 
 could stock your book and you could borrow a book. This project for final exam when I learn 
