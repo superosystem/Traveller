@@ -1,0 +1,47 @@
+version: '2.17'
+
+services:
+  mysql_db:
+    container_name: ts-mysql
+    image: mysql:8.0
+    ports:
+      - '3306:3306'
+    volumes:
+      - mysql-volume:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_NAME}
+      MYSQL_USER: ${MYSQL_USERNAME}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    healthcheck:
+      test: ['CMD', 'mysql', '-u', 'root', '-proot', '-e', 'SHOW SCHEMAS']
+      interval: 5s
+      retries: 3
+    networks:
+      - ts-backend-net
+
+  redis_db:
+    image: 'redis/redis-stack:latest'
+    container_name: 'ts-backend-redis'
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis-volume:/data
+    # command: redis-server /usr/local/etc/redis/redis.conf
+    # volumes:
+    #   - ./docker/conf/redis.conf:/usr/local/etc/redis/redis.conf
+    #   - redis-volume:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 5s
+      retries: 3
+    networks:
+      - ts-backend-net
+
+volumes:
+  mysql-volume:
+  redis-volume:
+
+networks:
+  ts-backend-net:
+    driver: bridge
