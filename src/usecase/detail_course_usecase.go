@@ -2,7 +2,7 @@ package usecase
 
 import "github.com/superosystem/trainingsystem-backend/src/domain"
 
-type detailCourseUsecase struct {
+type detailCourseUseCase struct {
 	menteeRepository           domain.MenteeRepository
 	courseRepository           domain.CourseRepository
 	moduleRepository           domain.ModuleRepository
@@ -13,7 +13,7 @@ type detailCourseUsecase struct {
 	menteeCourse               domain.MenteeCourseRepository
 }
 
-func NewDetailCourseUsecase(
+func NewDetailCourseUseCase(
 	menteeRepository domain.MenteeRepository,
 	courseRepository domain.CourseRepository,
 	moduleRepository domain.ModuleRepository,
@@ -22,8 +22,8 @@ func NewDetailCourseUsecase(
 	assignmentsRepository domain.AssignmentRepository,
 	menteeAssignmentRepository domain.MenteeAssignmentRepository,
 	menteeCourse domain.MenteeCourseRepository,
-) domain.DetailCourseUsecase {
-	return detailCourseUsecase{
+) domain.DetailCourseUseCase {
+	return detailCourseUseCase{
 		menteeRepository:           menteeRepository,
 		courseRepository:           courseRepository,
 		moduleRepository:           moduleRepository,
@@ -35,9 +35,8 @@ func NewDetailCourseUsecase(
 	}
 }
 
-func (dc detailCourseUsecase) DetailCourse(courseId string) (*domain.DetailCourse, error) {
+func (dc detailCourseUseCase) DetailCourse(courseId string) (*domain.DetailCourse, error) {
 	course, err := dc.courseRepository.FindById(courseId)
-
 	if err != nil {
 		return nil, err
 	}
@@ -118,15 +117,13 @@ func (dc detailCourseUsecase) DetailCourse(courseId string) (*domain.DetailCours
 	return &courseDomain, nil
 }
 
-func (dc detailCourseUsecase) DetailCourseEnrolled(menteeId string, courseId string) (*domain.DetailCourse, error) {
+func (dc detailCourseUseCase) DetailCourseEnrolled(menteeId string, courseId string) (*domain.DetailCourse, error) {
 	menteeCourse, err := dc.menteeCourse.CheckEnrollment(menteeId, courseId)
-
 	if err != nil {
 		return nil, err
 	}
 
 	course, err := dc.courseRepository.FindById(courseId)
-
 	if err != nil {
 		return nil, err
 	}

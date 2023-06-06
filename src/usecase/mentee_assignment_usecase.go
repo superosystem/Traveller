@@ -2,29 +2,28 @@ package usecase
 
 import (
 	"context"
+	"github.com/google/uuid"
+	"github.com/superosystem/trainingsystem-backend/src/common/config"
+	"github.com/superosystem/trainingsystem-backend/src/common/helper"
+	"github.com/superosystem/trainingsystem-backend/src/domain"
 	"math"
 	"path/filepath"
-
-	"github.com/google/uuid"
-	"github.com/superosystem/trainingsystem-backend/src/config"
-	"github.com/superosystem/trainingsystem-backend/src/domain"
-	"github.com/superosystem/trainingsystem-backend/src/helper"
 )
 
-type assignmentMenteeUsecase struct {
+type assignmentMenteeUseCase struct {
 	assignmentMenteeRepository domain.MenteeAssignmentRepository
 	assignmentRepository       domain.AssignmentRepository
 	menteeRepository           domain.MenteeRepository
 	storage                    *config.StorageConfig
 }
 
-func NewMenteeAssignmentUsecase(
+func NewMenteeAssignmentUseCase(
 	assignmentMenteeRepository domain.MenteeAssignmentRepository,
 	assignmentRepository domain.AssignmentRepository,
 	menteeRepository domain.MenteeRepository,
 	storage *config.StorageConfig,
-) domain.MenteeAssignmentUsecase {
-	return assignmentMenteeUsecase{
+) domain.MenteeAssignmentUseCase {
+	return assignmentMenteeUseCase{
 		assignmentMenteeRepository: assignmentMenteeRepository,
 		assignmentRepository:       assignmentRepository,
 		menteeRepository:           menteeRepository,
@@ -32,14 +31,13 @@ func NewMenteeAssignmentUsecase(
 	}
 }
 
-func (mu assignmentMenteeUsecase) Create(assignmentMenteeDomain *domain.MenteeAssignment) error {
+func (mu assignmentMenteeUseCase) Create(assignmentMenteeDomain *domain.MenteeAssignment) error {
 	_, err := mu.assignmentRepository.FindById(assignmentMenteeDomain.AssignmentId)
 	if err != nil {
 		return err
 	}
 
 	PDF, err := assignmentMenteeDomain.PDFfile.Open()
-
 	if err != nil {
 		return err
 	}
@@ -47,13 +45,11 @@ func (mu assignmentMenteeUsecase) Create(assignmentMenteeDomain *domain.MenteeAs
 	defer PDF.Close()
 
 	extension := filepath.Ext(assignmentMenteeDomain.PDFfile.Filename)
-
 	if extension != ".pdf" {
 		return helper.ErrUnsupportedAssignmentFile
 	}
 
 	filename, err := helper.GetFilename(assignmentMenteeDomain.PDFfile.Filename)
-
 	if err != nil {
 		return helper.ErrUnsupportedAssignmentFile
 	}
@@ -61,7 +57,6 @@ func (mu assignmentMenteeUsecase) Create(assignmentMenteeDomain *domain.MenteeAs
 	ctx := context.Background()
 
 	pdfUrl, err := mu.storage.UploadAsset(ctx, filename, PDF)
-
 	if err != nil {
 		return err
 	}
@@ -77,7 +72,6 @@ func (mu assignmentMenteeUsecase) Create(assignmentMenteeDomain *domain.MenteeAs
 	}
 
 	err = mu.assignmentMenteeRepository.Create(&assignmentMentee)
-
 	if err != nil {
 		return err
 	}
@@ -85,9 +79,8 @@ func (mu assignmentMenteeUsecase) Create(assignmentMenteeDomain *domain.MenteeAs
 	return nil
 }
 
-func (mu assignmentMenteeUsecase) FindById(assignmentMenteeId string) (*domain.MenteeAssignment, error) {
+func (mu assignmentMenteeUseCase) FindById(assignmentMenteeId string) (*domain.MenteeAssignment, error) {
 	assignmentMentee, err := mu.assignmentMenteeRepository.FindById(assignmentMenteeId)
-
 	if err != nil {
 		return nil, err
 	}
@@ -109,7 +102,7 @@ func (mu assignmentMenteeUsecase) FindById(assignmentMenteeId string) (*domain.M
 	return &menteeAssignment, nil
 }
 
-func (mu assignmentMenteeUsecase) FindMenteeAssignmentEnrolled(menteeId string, assignmentId string) (*domain.MenteeAssignment, error) {
+func (mu assignmentMenteeUseCase) FindMenteeAssignmentEnrolled(menteeId string, assignmentId string) (*domain.MenteeAssignment, error) {
 	if _, err := mu.menteeRepository.FindById(menteeId); err != nil {
 		return nil, err
 	}
@@ -139,9 +132,8 @@ func (mu assignmentMenteeUsecase) FindMenteeAssignmentEnrolled(menteeId string, 
 	return &menteeAssignment, nil
 }
 
-func (mu assignmentMenteeUsecase) FindByMenteeId(menteeId string) ([]domain.MenteeAssignment, error) {
+func (mu assignmentMenteeUseCase) FindByMenteeId(menteeId string) ([]domain.MenteeAssignment, error) {
 	assignmentMentee, err := mu.assignmentMenteeRepository.FindByMenteeId(menteeId)
-
 	if err != nil {
 		return nil, err
 	}
@@ -149,9 +141,8 @@ func (mu assignmentMenteeUsecase) FindByMenteeId(menteeId string) ([]domain.Ment
 	return assignmentMentee, nil
 }
 
-func (mu assignmentMenteeUsecase) FindByAssignmentId(assignmentId string, pagination helper.Pagination) (*helper.Pagination, error) {
+func (mu assignmentMenteeUseCase) FindByAssignmentId(assignmentId string, pagination helper.Pagination) (*helper.Pagination, error) {
 	menteeAssignments, totalRows, err := mu.assignmentMenteeRepository.FindByAssignmentId(assignmentId, pagination.GetLimit(), pagination.GetOffset())
-
 	if err != nil {
 		return nil, err
 	}
@@ -163,13 +154,12 @@ func (mu assignmentMenteeUsecase) FindByAssignmentId(assignmentId string, pagina
 	return &pagination, nil
 }
 
-func (mu assignmentMenteeUsecase) Update(assignmentMenteeId string, assignmentMenteeDomain *domain.MenteeAssignment) error {
+func (mu assignmentMenteeUseCase) Update(assignmentMenteeId string, assignmentMenteeDomain *domain.MenteeAssignment) error {
 	if _, err := mu.assignmentRepository.FindById(assignmentMenteeDomain.AssignmentId); err != nil {
 		return err
 	}
 
 	assignmentMentee, err := mu.assignmentMenteeRepository.FindById(assignmentMenteeId)
-
 	if err != nil {
 		return err
 	}
@@ -180,13 +170,11 @@ func (mu assignmentMenteeUsecase) Update(assignmentMenteeId string, assignmentMe
 		ctx := context.Background()
 
 		err = mu.storage.DeleteObject(ctx, assignmentMentee.AssignmentURL)
-
 		if err != nil {
 			return err
 		}
 
 		PDF, err := assignmentMenteeDomain.PDFfile.Open()
-
 		if err != nil {
 			return err
 		}
@@ -194,23 +182,19 @@ func (mu assignmentMenteeUsecase) Update(assignmentMenteeId string, assignmentMe
 		defer PDF.Close()
 
 		extension := filepath.Ext(assignmentMentee.PDFfile.Filename)
-
 		if extension != ".pdf" {
 			return helper.ErrUnsupportedAssignmentFile
 		}
 
 		filename, err := helper.GetFilename(assignmentMenteeDomain.PDFfile.Filename)
-
 		if err != nil {
 			return helper.ErrUnsupportedAssignmentFile
 		}
 
 		pdfUrl, err = mu.storage.UploadAsset(ctx, filename, PDF)
-
 		if err != nil {
 			return err
 		}
-
 	}
 
 	updatedMenteeAssignment := domain.MenteeAssignment{
@@ -221,7 +205,6 @@ func (mu assignmentMenteeUsecase) Update(assignmentMenteeId string, assignmentMe
 	}
 
 	err = mu.assignmentMenteeRepository.Update(assignmentMenteeId, &updatedMenteeAssignment)
-
 	if err != nil {
 		return err
 	}
@@ -229,9 +212,8 @@ func (mu assignmentMenteeUsecase) Update(assignmentMenteeId string, assignmentMe
 	return nil
 }
 
-func (mu assignmentMenteeUsecase) Delete(assignmentMenteeId string) error {
+func (mu assignmentMenteeUseCase) Delete(assignmentMenteeId string) error {
 	assignmentMentee, err := mu.assignmentMenteeRepository.FindById(assignmentMenteeId)
-
 	if err != nil {
 		return err
 	}

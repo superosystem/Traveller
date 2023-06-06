@@ -5,18 +5,18 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
+	"github.com/superosystem/trainingsystem-backend/src/common/helper"
 	"github.com/superosystem/trainingsystem-backend/src/controllers/otp/request"
 	"github.com/superosystem/trainingsystem-backend/src/domain"
-	"github.com/superosystem/trainingsystem-backend/src/helper"
 )
 
 type OTPController struct {
-	otpUsecase domain.OtpUsecase
+	otpUseCase domain.OtpUseCase
 }
 
-func NewOTPController(otpUsecase domain.OtpUsecase) *OTPController {
+func NewOTPController(otpUseCase domain.OtpUseCase) *OTPController {
 	return &OTPController{
-		otpUsecase: otpUsecase,
+		otpUseCase: otpUseCase,
 	}
 }
 
@@ -31,7 +31,7 @@ func (oc OTPController) HandlerSendOTP(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, helper.BadRequestResponse(err.Error()))
 	}
 
-	err := oc.otpUsecase.SendOTP(otpInput.ToDomain())
+	err := oc.otpUseCase.SendOTP(otpInput.ToDomain())
 
 	if err != nil {
 		if errors.Is(err, helper.ErrUserNotFound) {
@@ -55,7 +55,7 @@ func (oc OTPController) HandlerCheckOTP(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, helper.BadRequestResponse(err.Error()))
 	}
 
-	err := oc.otpUsecase.CheckOTP(otpInput.ToDomain())
+	err := oc.otpUseCase.CheckOTP(otpInput.ToDomain())
 
 	if err != nil {
 		if errors.Is(err, helper.ErrUserNotFound) {

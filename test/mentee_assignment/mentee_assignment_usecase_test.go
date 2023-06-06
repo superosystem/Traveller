@@ -8,17 +8,17 @@ import (
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
-	"github.com/superosystem/trainingsystem-backend/src/config"
+	"github.com/superosystem/trainingsystem-backend/src/common/config"
+	"github.com/superosystem/trainingsystem-backend/src/common/helper"
 	"github.com/superosystem/trainingsystem-backend/src/domain"
 	mocks "github.com/superosystem/trainingsystem-backend/src/domain/mocks/repository"
-	"github.com/superosystem/trainingsystem-backend/src/helper"
 	"github.com/superosystem/trainingsystem-backend/src/usecase"
 )
 
 var (
 	menteeAssignmentRepository mocks.MenteeAssignmentRepository
 	assignmentRepository       mocks.AssignmentRepository
-	menteeAssignmentService    domain.MenteeAssignmentUsecase
+	menteeAssignmentService    domain.MenteeAssignmentUseCase
 	menteeRepository           mocks.MenteeRepository
 	storageClient              config.StorageConfig
 
@@ -30,7 +30,7 @@ var (
 )
 
 func TestMain(m *testing.M) {
-	menteeAssignmentService = usecase.NewMenteeAssignmentUsecase(&menteeAssignmentRepository, &assignmentRepository, &menteeRepository, &storageClient)
+	menteeAssignmentService = usecase.NewMenteeAssignmentUseCase(&menteeAssignmentRepository, &assignmentRepository, &menteeRepository, &storageClient)
 
 	assignmentDomain = domain.Assignment{
 		ID:          uuid.NewString(),

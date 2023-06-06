@@ -1,6 +1,5 @@
 package domain
 
-type ManageMenteeUsecase interface {
-	// usecase delete access course mentee
+type ManageMenteeUseCase interface {
 	DeleteAccess(menteeId string, courseId string) error
 }

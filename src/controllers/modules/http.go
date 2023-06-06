@@ -5,19 +5,19 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
+	"github.com/superosystem/trainingsystem-backend/src/common/helper"
 	"github.com/superosystem/trainingsystem-backend/src/controllers/modules/request"
 	"github.com/superosystem/trainingsystem-backend/src/controllers/modules/response"
 	"github.com/superosystem/trainingsystem-backend/src/domain"
-	"github.com/superosystem/trainingsystem-backend/src/helper"
 )
 
 type ModuleController struct {
-	moduleUsecase domain.ModuleUsecase
+	moduleUseCase domain.ModuleUseCase
 }
 
-func NewModuleController(moduleUsecase domain.ModuleUsecase) *ModuleController {
+func NewModuleController(moduleUseCase domain.ModuleUseCase) *ModuleController {
 	return &ModuleController{
-		moduleUsecase: moduleUsecase,
+		moduleUseCase: moduleUseCase,
 	}
 }
 
@@ -32,7 +32,7 @@ func (ctrl *ModuleController) HandlerCreateModule(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, helper.BadRequestResponse(helper.ErrInvalidRequest.Error()))
 	}
 
-	err := ctrl.moduleUsecase.Create(moduleInput.ToDomain())
+	err := ctrl.moduleUseCase.Create(moduleInput.ToDomain())
 
 	if err != nil {
 		if errors.Is(err, helper.ErrCourseNotFound) {
@@ -48,7 +48,7 @@ func (ctrl *ModuleController) HandlerCreateModule(c echo.Context) error {
 func (ctrl *ModuleController) HandlerFindByIdModule(c echo.Context) error {
 	moduleId := c.Param("moduleId")
 
-	module, err := ctrl.moduleUsecase.FindById(moduleId)
+	module, err := ctrl.moduleUseCase.FindById(moduleId)
 
 	if err != nil {
 		if errors.Is(err, helper.ErrModuleNotFound) {
@@ -73,7 +73,7 @@ func (ctrl *ModuleController) HandlerUpdateModule(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, helper.BadRequestResponse(err.Error()))
 	}
 
-	err := ctrl.moduleUsecase.Update(moduleId, moduleInput.ToDomain())
+	err := ctrl.moduleUseCase.Update(moduleId, moduleInput.ToDomain())
 
 	if err != nil {
 		if errors.Is(err, helper.ErrCourseNotFound) {
@@ -91,7 +91,7 @@ func (ctrl *ModuleController) HandlerUpdateModule(c echo.Context) error {
 func (ctrl *ModuleController) HandlerDeleteModule(c echo.Context) error {
 	moduleId := c.Param("moduleId")
 
-	err := ctrl.moduleUsecase.Delete(moduleId)
+	err := ctrl.moduleUseCase.Delete(moduleId)
 
 	if err != nil {
 		if errors.Is(err, helper.ErrModuleNotFound) {

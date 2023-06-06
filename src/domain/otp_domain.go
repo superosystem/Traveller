@@ -15,7 +15,7 @@ type OtpRepository interface {
 	Get(ctx context.Context, key string) (string, error)
 }
 
-type OtpUsecase interface {
+type OtpUseCase interface {
 	SendOTP(otpDomain *Otp) error
 	CheckOTP(otpDomain *Otp) error
 }

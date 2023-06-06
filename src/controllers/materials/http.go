@@ -5,19 +5,19 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
+	"github.com/superosystem/trainingsystem-backend/src/common/helper"
 	"github.com/superosystem/trainingsystem-backend/src/controllers/materials/request"
 	"github.com/superosystem/trainingsystem-backend/src/controllers/materials/response"
 	"github.com/superosystem/trainingsystem-backend/src/domain"
-	"github.com/superosystem/trainingsystem-backend/src/helper"
 )
 
 type MaterialController struct {
-	materialUsecase domain.MaterialUsecase
+	materialUseCase domain.MaterialUseCase
 }
 
-func NewMaterialController(materialUsecase domain.MaterialUsecase) *MaterialController {
+func NewMaterialController(materialUseCase domain.MaterialUseCase) *MaterialController {
 	return &MaterialController{
-		materialUsecase: materialUsecase,
+		materialUseCase: materialUseCase,
 	}
 }
 
@@ -34,7 +34,7 @@ func (ctrl *MaterialController) HandlerCreateMaterial(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, helper.BadRequestResponse(err.Error()))
 	}
 
-	err := ctrl.materialUsecase.Create(materialInput.ToDomain())
+	err := ctrl.materialUseCase.Create(materialInput.ToDomain())
 
 	if err != nil {
 		if errors.Is(err, helper.ErrModuleNotFound) {
@@ -52,7 +52,7 @@ func (ctrl *MaterialController) HandlerCreateMaterial(c echo.Context) error {
 func (ctrl *MaterialController) HandlerFindByIdMaterial(c echo.Context) error {
 	materialId := c.Param("materialId")
 
-	material, err := ctrl.materialUsecase.FindById(materialId)
+	material, err := ctrl.materialUseCase.FindById(materialId)
 
 	if err != nil {
 		if errors.Is(err, helper.ErrMaterialAssetNotFound) {
@@ -88,7 +88,7 @@ func (ctrl *MaterialController) HandlerUpdateMaterial(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, helper.BadRequestResponse(err.Error()))
 	}
 
-	err := ctrl.materialUsecase.Update(materialId, materialInput.ToDomain())
+	err := ctrl.materialUseCase.Update(materialId, materialInput.ToDomain())
 
 	if err != nil {
 		if errors.Is(err, helper.ErrModuleNotFound) {
@@ -110,7 +110,7 @@ func (ctrl *MaterialController) HandlerUpdateMaterial(c echo.Context) error {
 func (ctrl *MaterialController) HandlerSoftDeleteMaterial(c echo.Context) error {
 	materialId := c.Param("materialId")
 
-	err := ctrl.materialUsecase.Delete(materialId)
+	err := ctrl.materialUseCase.Delete(materialId)
 
 	if err != nil {
 		if errors.Is(err, helper.ErrMaterialAssetNotFound) {
@@ -126,7 +126,7 @@ func (ctrl *MaterialController) HandlerSoftDeleteMaterial(c echo.Context) error 
 func (ctrl *MaterialController) HandlerSoftDeleteMaterialByModule(c echo.Context) error {
 	moduleId := c.Param("moduleId")
 
-	err := ctrl.materialUsecase.Deletes(moduleId)
+	err := ctrl.materialUseCase.Deletes(moduleId)
 
 	if err != nil {
 		if errors.Is(err, helper.ErrModuleNotFound) {

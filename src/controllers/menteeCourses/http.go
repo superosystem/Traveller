@@ -5,19 +5,19 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
+	"github.com/superosystem/trainingsystem-backend/src/common/helper"
 	"github.com/superosystem/trainingsystem-backend/src/controllers/menteeCourses/request"
 	"github.com/superosystem/trainingsystem-backend/src/controllers/menteeCourses/response"
 	"github.com/superosystem/trainingsystem-backend/src/domain"
-	"github.com/superosystem/trainingsystem-backend/src/helper"
 )
 
 type MenteeCourseController struct {
-	menteeCourseUsecase domain.MenteeCourseUsecase
+	menteeCourseUseCase domain.MenteeCourseUseCase
 }
 
-func NewMenteeCourseController(menteeCourseUsecase domain.MenteeCourseUsecase) *MenteeCourseController {
+func NewMenteeCourseController(menteeCourseUseCase domain.MenteeCourseUseCase) *MenteeCourseController {
 	return &MenteeCourseController{
-		menteeCourseUsecase: menteeCourseUsecase,
+		menteeCourseUseCase: menteeCourseUseCase,
 	}
 }
 
@@ -32,7 +32,7 @@ func (ctrl *MenteeCourseController) HandlerEnrollCourse(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, helper.BadRequestResponse(err.Error()))
 	}
 
-	err := ctrl.menteeCourseUsecase.Enroll(menteeCourseInput.ToDomain())
+	err := ctrl.menteeCourseUseCase.Enroll(menteeCourseInput.ToDomain())
 
 	if err != nil {
 		if errors.Is(err, helper.ErrCourseNotFound) {
@@ -52,7 +52,7 @@ func (ctrl *MenteeCourseController) HandlerFindMenteeCourses(c echo.Context) err
 	status := c.QueryParam("status")
 	menteeId := c.Param("menteeId")
 
-	courses, err := ctrl.menteeCourseUsecase.FindMenteeCourses(menteeId, title, status)
+	courses, err := ctrl.menteeCourseUseCase.FindMenteeCourses(menteeId, title, status)
 
 	if err != nil {
 		if errors.Is(err, helper.ErrMenteeNotFound) {
@@ -75,7 +75,7 @@ func (ctrl *MenteeCourseController) HandlerCheckEnrollmentCourse(c echo.Context)
 	courseId := c.Param("courseId")
 	menteeId := c.Param("menteeId")
 
-	isEnrolled, err := ctrl.menteeCourseUsecase.CheckEnrollment(menteeId, courseId)
+	isEnrolled, err := ctrl.menteeCourseUseCase.CheckEnrollment(menteeId, courseId)
 
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, helper.InternalServerErrorResponse(helper.ErrInternalServerError.Error()))
@@ -90,7 +90,7 @@ func (ctrl *MenteeCourseController) HandlerCompleteCourse(c echo.Context) error 
 	courseId := c.Param("courseId")
 	menteeId := c.Param("menteeId")
 
-	err := ctrl.menteeCourseUsecase.CompleteCourse(menteeId, courseId)
+	err := ctrl.menteeCourseUseCase.CompleteCourse(menteeId, courseId)
 
 	if err != nil {
 		if errors.Is(err, helper.ErrRecordNotFound) {

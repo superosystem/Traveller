@@ -1,8 +1,6 @@
 package domain
 
-import (
-	"time"
-)
+import "time"
 
 type Review struct {
 	ID          string
@@ -18,20 +16,12 @@ type Review struct {
 }
 
 type ReviewRepository interface {
-	// Create repository create new review course
 	Create(reviewDomain *Review) error
-
-	// FindByCourse repository find all course reviews
 	FindByCourse(courseId string) ([]Review, error)
 }
 
-type ReviewUsecase interface {
-	// Create usecase create new review course
+type ReviewUseCase interface {
 	Create(reviewDomain *Review) error
-
-	// FindByCourse usecase find all course reviews
 	FindByCourse(courseId string) ([]Review, error)
-
-	// FindByMentee usecase find all mentee reviews
 	FindByMentee(menteeId string, title string) ([]Review, error)
 }

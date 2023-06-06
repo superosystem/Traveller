@@ -4,23 +4,23 @@ import (
 	"errors"
 	"net/http"
 
-	"github.com/superosystem/trainingsystem-backend/src/config"
+	"github.com/superosystem/trainingsystem-backend/src/common/config"
+	"github.com/superosystem/trainingsystem-backend/src/common/helper"
 	"github.com/superosystem/trainingsystem-backend/src/controllers/mentors/request"
 	"github.com/superosystem/trainingsystem-backend/src/controllers/mentors/response"
 	"github.com/superosystem/trainingsystem-backend/src/domain"
-	"github.com/superosystem/trainingsystem-backend/src/helper"
 
 	"github.com/labstack/echo/v4"
 )
 
 type MentorController struct {
-	mentorUsecase domain.MentorUsecase
+	mentorUseCase domain.MentorUseCase
 	jwtConfig     *config.JWTConfig
 }
 
-func NewMentorController(mentorUsecase domain.MentorUsecase, jwtConfig *config.JWTConfig) *MentorController {
+func NewMentorController(mentorUseCase domain.MentorUseCase, jwtConfig *config.JWTConfig) *MentorController {
 	return &MentorController{
-		mentorUsecase: mentorUsecase,
+		mentorUseCase: mentorUseCase,
 		jwtConfig:     jwtConfig,
 	}
 }
@@ -36,7 +36,7 @@ func (ctrl *MentorController) HandlerRegisterMentor(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, helper.BadRequestResponse(err.Error()))
 	}
 
-	err := ctrl.mentorUsecase.Register(mentorInput.ToDomain())
+	err := ctrl.mentorUseCase.Register(mentorInput.ToDomain())
 	if err != nil {
 		if errors.Is(err, helper.ErrPasswordLengthInvalid) {
 			return c.JSON(http.StatusBadRequest, helper.BadRequestResponse(helper.ErrPasswordLengthInvalid.Error()))
@@ -61,7 +61,7 @@ func (ctrl *MentorController) HandlerLoginMentor(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, helper.BadRequestResponse(err.Error()))
 	}
 
-	res, err := ctrl.mentorUsecase.Login(mentorInput.ToDomain())
+	res, err := ctrl.mentorUseCase.Login(mentorInput.ToDomain())
 
 	if err != nil {
 		if errors.Is(err, helper.ErrUserNotFound) {
@@ -91,7 +91,7 @@ func (ctrl *MentorController) HandlerUpdatePassword(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, helper.BadRequestResponse(err.Error()))
 	}
 
-	err := ctrl.mentorUsecase.UpdatePassword(mentorInput.ToDomain())
+	err := ctrl.mentorUseCase.UpdatePassword(mentorInput.ToDomain())
 
 	if err != nil {
 		if errors.Is(err, helper.ErrPasswordLengthInvalid) {
@@ -111,7 +111,7 @@ func (ctrl *MentorController) HandlerUpdatePassword(c echo.Context) error {
 func (ctrl *MentorController) HandlerFindByID(c echo.Context) error {
 	var id string = c.Param("mentorId")
 
-	mentor, err := ctrl.mentorUsecase.FindById(id)
+	mentor, err := ctrl.mentorUseCase.FindById(id)
 
 	if err != nil {
 		if errors.Is(err, helper.ErrMentorNotFound) {
@@ -129,7 +129,7 @@ func (ctrl *MentorController) HandlerFindByID(c echo.Context) error {
 func (ctrl *MentorController) HandlerProfileMentor(c echo.Context) error {
 	token, _ := ctrl.jwtConfig.ExtractToken(c)
 
-	mentor, err := ctrl.mentorUsecase.FindById(token.MentorId)
+	mentor, err := ctrl.mentorUseCase.FindById(token.MentorId)
 
 	if err != nil {
 		if errors.Is(err, helper.ErrMentorNotFound) {
@@ -146,7 +146,7 @@ func (ctrl *MentorController) HandlerProfileMentor(c echo.Context) error {
 
 func (ctrl *MentorController) HandlerFindAll(c echo.Context) error {
 
-	mentors, err := ctrl.mentorUsecase.FindAll()
+	mentors, err := ctrl.mentorUseCase.FindAll()
 
 	allMentor := []response.FindMentorAll{}
 
@@ -196,7 +196,7 @@ func (ctrl *MentorController) HandlerUpdateProfile(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, helper.BadRequestResponse(err.Error()))
 	}
 
-	err := ctrl.mentorUsecase.Update(mentorId, mentorInput.ToDomain())
+	err := ctrl.mentorUseCase.Update(mentorId, mentorInput.ToDomain())
 
 	if err != nil {
 		if errors.Is(err, helper.ErrInvalidRequest) {
@@ -226,7 +226,7 @@ func (ctrl *MentorController) HandlerForgotPassword(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, helper.BadRequestResponse(err.Error()))
 	}
 
-	err := ctrl.mentorUsecase.ForgotPassword(mentorInput.ToDomain())
+	err := ctrl.mentorUseCase.ForgotPassword(mentorInput.ToDomain())
 
 	if err != nil {
 		if errors.Is(err, helper.ErrUserNotFound) {

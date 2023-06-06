@@ -11,20 +11,11 @@ type User struct {
 }
 
 type UserRepository interface {
-	// Create add new user
 	Create(userDomain *User) error
-
-	// FindAll find all users
 	FindAll() (*[]User, error)
-
-	// FindByEmail find user by email
 	FindByEmail(email string) (*User, error)
-
-	// FindById find user by id
 	FindById(id string) (*User, error)
-
-	// Update edit data user
 	Update(id string, userDomain *User) error
 }
 
-type UserUsecase interface{}
+type UserUseCase interface{}

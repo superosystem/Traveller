@@ -6,7 +6,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
-	"github.com/superosystem/trainingsystem-backend/src/config"
+	"github.com/superosystem/trainingsystem-backend/src/common/config"
 	"github.com/superosystem/trainingsystem-backend/src/domain"
 	mocks "github.com/superosystem/trainingsystem-backend/src/domain/mocks/repository"
 	"github.com/superosystem/trainingsystem-backend/src/usecase"
@@ -14,7 +14,7 @@ import (
 
 var (
 	mentorRepository mocks.MentorRepository
-	mentorService    domain.MentorUsecase
+	mentorService    domain.MentorUseCase
 	userRepository   mocks.UserRepository
 	jwtConfig        config.JWTConfig
 	storageClient    config.StorageConfig
@@ -30,7 +30,7 @@ func TestMain(m *testing.M) {
 	jwtConfig = config.JWTConfig{JWTSecret: "secret"}
 	storageClient = config.StorageConfig{}
 
-	mentorService = usecase.NewMentorUsecase(&mentorRepository, &userRepository, &jwtConfig, &storageClient, &mailerConfig)
+	mentorService = usecase.NewMentorUseCase(&mentorRepository, &userRepository, &jwtConfig, &storageClient, &mailerConfig)
 
 	// birth date
 	birthDate := time.Date(2021, 8, 11, 0, 0, 0, 0, time.Local)

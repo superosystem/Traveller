@@ -2,39 +2,37 @@ package usecase
 
 import (
 	"context"
-	"path/filepath"
-
 	"github.com/google/uuid"
-	"github.com/superosystem/trainingsystem-backend/src/config"
+	"github.com/superosystem/trainingsystem-backend/src/common/config"
+	"github.com/superosystem/trainingsystem-backend/src/common/helper"
 	"github.com/superosystem/trainingsystem-backend/src/domain"
-	"github.com/superosystem/trainingsystem-backend/src/helper"
+	"path/filepath"
 )
 
-type materialUsecase struct {
+type materialUseCase struct {
 	materialRepository domain.MaterialRepository
 	moduleRepository   domain.ModuleRepository
 	storage            *config.StorageConfig
 }
 
-func NewMaterialUsecase(
+func NewMaterialUseCase(
 	materialRepository domain.MaterialRepository,
 	moduleRepository domain.ModuleRepository,
 	storage *config.StorageConfig,
-) domain.MaterialUsecase {
-	return materialUsecase{
+) domain.MaterialUseCase {
+	return materialUseCase{
 		materialRepository: materialRepository,
 		moduleRepository:   moduleRepository,
 		storage:            storage,
 	}
 }
 
-func (mu materialUsecase) Create(materialDomain *domain.Material) error {
+func (mu materialUseCase) Create(materialDomain *domain.Material) error {
 	if _, err := mu.moduleRepository.FindById(materialDomain.ModuleId); err != nil {
 		return err
 	}
 
 	file, err := materialDomain.File.Open()
-
 	if err != nil {
 		return err
 	}
@@ -48,7 +46,6 @@ func (mu materialUsecase) Create(materialDomain *domain.Material) error {
 	}
 
 	filename, err := helper.GetFilename(materialDomain.File.Filename)
-
 	if err != nil {
 		return helper.ErrUnsupportedVideoFile
 	}
@@ -56,7 +53,6 @@ func (mu materialUsecase) Create(materialDomain *domain.Material) error {
 	ctx := context.Background()
 
 	url, err := mu.storage.UploadVideo(ctx, filename, file)
-
 	if err != nil {
 		return err
 	}
@@ -76,9 +72,8 @@ func (mu materialUsecase) Create(materialDomain *domain.Material) error {
 	return nil
 }
 
-func (mu materialUsecase) FindById(materialId string) (*domain.Material, error) {
+func (mu materialUseCase) FindById(materialId string) (*domain.Material, error) {
 	material, err := mu.materialRepository.FindById(materialId)
-
 	if err != nil {
 		return nil, err
 	}
@@ -86,13 +81,12 @@ func (mu materialUsecase) FindById(materialId string) (*domain.Material, error) 
 	return material, nil
 }
 
-func (mu materialUsecase) Update(materialId string, materialDomain *domain.Material) error {
+func (mu materialUseCase) Update(materialId string, materialDomain *domain.Material) error {
 	if _, err := mu.moduleRepository.FindById(materialDomain.ModuleId); err != nil {
 		return err
 	}
 
 	material, err := mu.materialRepository.FindById(materialId)
-
 	if err != nil {
 		return err
 	}
@@ -103,13 +97,11 @@ func (mu materialUsecase) Update(materialId string, materialDomain *domain.Mater
 		ctx := context.Background()
 
 		err := mu.storage.DeleteObject(ctx, material.URL)
-
 		if err != nil {
 			return err
 		}
 
 		file, err := materialDomain.File.Open()
-
 		if err != nil {
 			return err
 		}
@@ -123,13 +115,11 @@ func (mu materialUsecase) Update(materialId string, materialDomain *domain.Mater
 		}
 
 		filename, err := helper.GetFilename(materialDomain.File.Filename)
-
 		if err != nil {
 			return helper.ErrUnsupportedVideoFile
 		}
 
 		url, err = mu.storage.UploadVideo(ctx, filename, file)
-
 		if err != nil {
 			return err
 		}
@@ -149,13 +139,12 @@ func (mu materialUsecase) Update(materialId string, materialDomain *domain.Mater
 	return nil
 }
 
-func (mu materialUsecase) Delete(materialId string) error {
+func (mu materialUseCase) Delete(materialId string) error {
 	if _, err := mu.materialRepository.FindById(materialId); err != nil {
 		return err
 	}
 
 	err := mu.materialRepository.Delete(materialId)
-
 	if err != nil {
 		return err
 	}
@@ -163,13 +152,12 @@ func (mu materialUsecase) Delete(materialId string) error {
 	return nil
 }
 
-func (mu materialUsecase) Deletes(moduleId string) error {
+func (mu materialUseCase) Deletes(moduleId string) error {
 	if _, err := mu.moduleRepository.FindById(moduleId); err != nil {
 		return err
 	}
 
 	err := mu.materialRepository.Deletes(moduleId)
-
 	if err != nil {
 		return err
 	}

@@ -5,25 +5,25 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
+	"github.com/superosystem/trainingsystem-backend/src/common/helper"
 	"github.com/superosystem/trainingsystem-backend/src/controllers/detailCourse/response"
 	"github.com/superosystem/trainingsystem-backend/src/domain"
-	"github.com/superosystem/trainingsystem-backend/src/helper"
 )
 
 type DetailCourseController struct {
-	detailCourseUsecase domain.DetailCourseUsecase
+	detailCourseUseCase domain.DetailCourseUseCase
 }
 
-func NewDetailCourseController(detailCourseUsecase domain.DetailCourseUsecase) *DetailCourseController {
+func NewDetailCourseController(detailCourseUseCase domain.DetailCourseUseCase) *DetailCourseController {
 	return &DetailCourseController{
-		detailCourseUsecase: detailCourseUsecase,
+		detailCourseUseCase: detailCourseUseCase,
 	}
 }
 
 func (ctrl *DetailCourseController) HandlerDetailCourse(c echo.Context) error {
 	courseId := c.Param("courseId")
 
-	course, err := ctrl.detailCourseUsecase.DetailCourse(courseId)
+	course, err := ctrl.detailCourseUseCase.DetailCourse(courseId)
 
 	if err != nil {
 		if errors.Is(err, helper.ErrCourseNotFound) {
@@ -40,7 +40,7 @@ func (ctrl *DetailCourseController) HandlerDetailCourseEnrolled(c echo.Context) 
 	menteeId := c.Param("menteeId")
 	courseId := c.Param("courseId")
 
-	course, err := ctrl.detailCourseUsecase.DetailCourseEnrolled(menteeId, courseId)
+	course, err := ctrl.detailCourseUseCase.DetailCourseEnrolled(menteeId, courseId)
 
 	if err != nil {
 		if errors.Is(err, helper.ErrMenteeNotFound) {

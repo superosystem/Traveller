@@ -5,9 +5,9 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
+	"github.com/superosystem/trainingsystem-backend/src/common/helper"
 	"github.com/superosystem/trainingsystem-backend/src/domain"
 	mocks "github.com/superosystem/trainingsystem-backend/src/domain/mocks/repository"
-	"github.com/superosystem/trainingsystem-backend/src/helper"
 	"github.com/superosystem/trainingsystem-backend/src/usecase"
 )
 
@@ -20,7 +20,7 @@ var (
 	assignmentRepository       mocks.AssignmentRepository
 	menteeAssignmentRepository mocks.MenteeAssignmentRepository
 	menteeCourseRepository     mocks.MenteeCourseRepository
-	detailCourseService        domain.DetailCourseUsecase
+	detailCourseService        domain.DetailCourseUseCase
 	menteeDomain               domain.Mentee
 	courseDomain               domain.Course
 	assignmentDomain           domain.Assignment
@@ -32,7 +32,7 @@ var (
 )
 
 func TestMain(m *testing.M) {
-	detailCourseService = usecase.NewDetailCourseUsecase(
+	detailCourseService = usecase.NewDetailCourseUseCase(
 		&menteeRepository,
 		&courseRepository,
 		&moduleRepository,

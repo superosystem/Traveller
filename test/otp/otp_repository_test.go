@@ -2,12 +2,13 @@ package otp_test
 
 import (
 	"context"
+	"github.com/superosystem/trainingsystem-backend/src/repository"
 	"testing"
 
 	"github.com/go-redis/redismock/v8"
 	"github.com/stretchr/testify/suite"
+	"github.com/superosystem/trainingsystem-backend/src/common/helper"
 	"github.com/superosystem/trainingsystem-backend/src/domain"
-	"github.com/superosystem/trainingsystem-backend/src/helper"
 )
 
 type suiteOtp struct {

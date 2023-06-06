@@ -1,10 +1,9 @@
 package entities
 
 import (
-	"time"
-
 	"github.com/superosystem/trainingsystem-backend/src/domain"
 	"gorm.io/gorm"
+	"time"
 )
 
 type Module struct {

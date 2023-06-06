@@ -52,11 +52,7 @@ type DetailMaterial struct {
 	UpdatedAt   time.Time
 }
 
-type DetailCourseUsecase interface {
-	// DetailCourse usecase detail course with modules and materials
+type DetailCourseUseCase interface {
 	DetailCourse(courseId string) (*DetailCourse, error)
-
-	// DetailCourseEnrolled usecase detail course with module and material
-	// for mentee who already enroll the course
 	DetailCourseEnrolled(menteeId string, courseId string) (*DetailCourse, error)
 }

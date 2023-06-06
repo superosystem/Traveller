@@ -2,43 +2,39 @@ package usecase
 
 import (
 	"bytes"
-	"html/template"
-
 	"github.com/SebastiaanKlippert/go-wkhtmltopdf"
+	"github.com/superosystem/trainingsystem-backend/src/common/templates"
 	"github.com/superosystem/trainingsystem-backend/src/domain"
-	"github.com/superosystem/trainingsystem-backend/src/templates"
+	"html/template"
 )
 
-type certificateUsecase struct {
+type certificateUseCase struct {
 	menteeRepository domain.MenteeRepository
 	courseRepository domain.CourseRepository
 }
 
-func NewCertificateUsecase(menteeRepository domain.MenteeRepository, courseRepository domain.CourseRepository) domain.CertificateUsecase {
-	return certificateUsecase{
+func NewCertificateUseCase(
+	menteeRepository domain.MenteeRepository,
+	courseRepository domain.CourseRepository,
+) domain.CertificateUseCase {
+	return certificateUseCase{
 		menteeRepository: menteeRepository,
 		courseRepository: courseRepository,
 	}
 }
 
-func (cu certificateUsecase) GenerateCert(data *domain.Certificate) ([]byte, error) {
-	// NOTE: in windows, should be point to wkhtmltopdf executable file
-	// wkhtmltopdf.SetPath("C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe")
-
+func (cu certificateUseCase) GenerateCert(data *domain.Certificate) ([]byte, error) {
 	mentee, err := cu.menteeRepository.FindById(data.MenteeId)
-
 	if err != nil {
 		return nil, err
 	}
 
 	course, err := cu.courseRepository.FindById(data.CourseId)
-
 	if err != nil {
 		return nil, err
 	}
 
 	tmpl, err := template.New("").Parse(templates.Certificate)
-
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +54,6 @@ func (cu certificateUsecase) GenerateCert(data *domain.Certificate) ([]byte, err
 
 	// init a wkhtmltopdf generator
 	pdfg, err := wkhtmltopdf.NewPDFGenerator()
-
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +75,6 @@ func (cu certificateUsecase) GenerateCert(data *domain.Certificate) ([]byte, err
 	pdfg.PageSize.Set(wkhtmltopdf.PageSizeA5)
 	pdfg.Orientation.Set(wkhtmltopdf.OrientationLandscape)
 	pdfg.Cover.Zoom.Set(1.2)
-
 	if err := pdfg.Create(); err != nil {
 		return nil, err
 	}

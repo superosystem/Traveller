@@ -6,21 +6,21 @@ import (
 	"strconv"
 
 	"github.com/labstack/echo/v4"
-	"github.com/superosystem/trainingsystem-backend/src/config"
+	"github.com/superosystem/trainingsystem-backend/src/common/config"
+	"github.com/superosystem/trainingsystem-backend/src/common/helper"
 	"github.com/superosystem/trainingsystem-backend/src/controllers/mentees/request"
 	"github.com/superosystem/trainingsystem-backend/src/controllers/mentees/response"
 	"github.com/superosystem/trainingsystem-backend/src/domain"
-	"github.com/superosystem/trainingsystem-backend/src/helper"
 )
 
 type MenteeController struct {
-	menteeUsecase domain.MenteeUsecase
+	menteeUseCase domain.MenteeUseCase
 	jwtConfig     *config.JWTConfig
 }
 
-func NewMenteeController(menteeUsecase domain.MenteeUsecase, jwtConfig *config.JWTConfig) *MenteeController {
+func NewMenteeController(menteeUseCase domain.MenteeUseCase, jwtConfig *config.JWTConfig) *MenteeController {
 	return &MenteeController{
-		menteeUsecase: menteeUsecase,
+		menteeUseCase: menteeUseCase,
 		jwtConfig:     jwtConfig,
 	}
 }
@@ -36,7 +36,7 @@ func (ctrl *MenteeController) HandlerRegisterMentee(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, helper.BadRequestResponse(err.Error()))
 	}
 
-	err := ctrl.menteeUsecase.Register(menteeInput.ToDomain())
+	err := ctrl.menteeUseCase.Register(menteeInput.ToDomain())
 
 	if err != nil {
 		if errors.Is(err, helper.ErrPasswordLengthInvalid) {
@@ -62,7 +62,7 @@ func (ctrl *MenteeController) HandlerVerifyRegisterMentee(c echo.Context) error 
 		return c.JSON(http.StatusBadRequest, helper.BadRequestResponse(err.Error()))
 	}
 
-	err := ctrl.menteeUsecase.VerifyRegister(menteeInput.ToDomain())
+	err := ctrl.menteeUseCase.VerifyRegister(menteeInput.ToDomain())
 
 	if err != nil {
 		if errors.Is(err, helper.ErrOTPExpired) {
@@ -88,7 +88,7 @@ func (ctrl *MenteeController) HandlerLoginMentee(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, helper.BadRequestResponse(err.Error()))
 	}
 
-	res, err := ctrl.menteeUsecase.Login(menteeInput.ToDomain())
+	res, err := ctrl.menteeUseCase.Login(menteeInput.ToDomain())
 
 	if err != nil {
 		if errors.Is(err, helper.ErrUserNotFound) {
@@ -116,7 +116,7 @@ func (ctrl *MenteeController) HandlerForgotPassword(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, helper.BadRequestResponse(err.Error()))
 	}
 
-	err := ctrl.menteeUsecase.ForgotPassword(menteeInput.ToDomain())
+	err := ctrl.menteeUseCase.ForgotPassword(menteeInput.ToDomain())
 
 	if err != nil {
 		if errors.Is(err, helper.ErrPasswordLengthInvalid) {
@@ -148,7 +148,7 @@ func (ctrl MenteeController) HandlerFindMenteesByCourse(c echo.Context) error {
 		Page:  page,
 	}
 
-	res, err := ctrl.menteeUsecase.FindByCourse(courseId, pagination)
+	res, err := ctrl.menteeUseCase.FindByCourse(courseId, pagination)
 
 	if err != nil {
 		if errors.Is(err, helper.ErrCourseNotFound) {
@@ -174,7 +174,7 @@ func (ctrl MenteeController) HandlerFindMenteesByCourse(c echo.Context) error {
 func (ctrl *MenteeController) HandlerFindByID(c echo.Context) error {
 	var id string = c.Param("menteeId")
 
-	mentee, err := ctrl.menteeUsecase.FindById(id)
+	mentee, err := ctrl.menteeUseCase.FindById(id)
 
 	if err != nil {
 		if errors.Is(err, helper.ErrMenteeNotFound) {
@@ -192,7 +192,7 @@ func (ctrl *MenteeController) HandlerFindByID(c echo.Context) error {
 func (ctrl *MenteeController) HandlerProfileMentee(c echo.Context) error {
 	token, _ := ctrl.jwtConfig.ExtractToken(c)
 
-	mentee, err := ctrl.menteeUsecase.FindById(token.MenteeId)
+	mentee, err := ctrl.menteeUseCase.FindById(token.MenteeId)
 
 	if err != nil {
 		if errors.Is(err, helper.ErrMenteeNotFound) {
@@ -209,7 +209,7 @@ func (ctrl *MenteeController) HandlerProfileMentee(c echo.Context) error {
 
 func (ctrl *MenteeController) HandlerFindAll(c echo.Context) error {
 
-	mentees, err := ctrl.menteeUsecase.FindAll()
+	mentees, err := ctrl.menteeUseCase.FindAll()
 
 	allMentees := []response.FindAllMentees{}
 
@@ -254,7 +254,7 @@ func (ctrl *MenteeController) HandlerUpdateProfile(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, helper.BadRequestResponse(err.Error()))
 	}
 
-	err := ctrl.menteeUsecase.Update(menteeId, menteeInput.ToDomain())
+	err := ctrl.menteeUseCase.Update(menteeId, menteeInput.ToDomain())
 
 	if err != nil {
 		if errors.Is(err, helper.ErrInvalidRequest) {

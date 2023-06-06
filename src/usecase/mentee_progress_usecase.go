@@ -5,20 +5,20 @@ import (
 	"github.com/superosystem/trainingsystem-backend/src/domain"
 )
 
-type menteeProgressUsecase struct {
+type menteeProgressUseCase struct {
 	menteeProgressRepository domain.MenteeProgressRepository
 	menteeRepository         domain.MenteeRepository
 	courseRepository         domain.CourseRepository
 	materialRepository       domain.MaterialRepository
 }
 
-func NewMenteeProgressUsecase(
+func NewMenteeProgressUseCase(
 	menteeProgressRepository domain.MenteeProgressRepository,
 	menteeRepository domain.MenteeRepository,
 	courseRepository domain.CourseRepository,
 	materialRepository domain.MaterialRepository,
-) domain.MenteeProgressUsecase {
-	return menteeProgressUsecase{
+) domain.MenteeProgressUseCase {
+	return menteeProgressUseCase{
 		menteeProgressRepository: menteeProgressRepository,
 		menteeRepository:         menteeRepository,
 		courseRepository:         courseRepository,
@@ -26,7 +26,7 @@ func NewMenteeProgressUsecase(
 	}
 }
 
-func (m menteeProgressUsecase) Add(menteeProgressDomain *domain.MenteeProgress) error {
+func (m menteeProgressUseCase) Add(menteeProgressDomain *domain.MenteeProgress) error {
 	if _, err := m.menteeRepository.FindById(menteeProgressDomain.MenteeId); err != nil {
 		return err
 	}
@@ -48,7 +48,6 @@ func (m menteeProgressUsecase) Add(menteeProgressDomain *domain.MenteeProgress) 
 	}
 
 	err := m.menteeProgressRepository.Add(&menteeProgress)
-
 	if err != nil {
 		return err
 	}
@@ -56,13 +55,12 @@ func (m menteeProgressUsecase) Add(menteeProgressDomain *domain.MenteeProgress) 
 	return nil
 }
 
-func (m menteeProgressUsecase) FindMaterialEnrolled(menteeId string, materialId string) (*domain.MenteeProgress, error) {
+func (m menteeProgressUseCase) FindMaterialEnrolled(menteeId string, materialId string) (*domain.MenteeProgress, error) {
 	if _, err := m.menteeRepository.FindById(menteeId); err != nil {
 		return nil, err
 	}
 
 	material, err := m.materialRepository.FindById(materialId)
-
 	if err != nil {
 		return nil, err
 	}

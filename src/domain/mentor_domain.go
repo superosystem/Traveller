@@ -57,41 +57,19 @@ type MentorUpdateProfile struct {
 }
 
 type MentorRepository interface {
-	// Create repository create mentors
 	Create(mentorDomain *Mentor) error
-
-	// FindAll repository find all mentors
 	FindAll() (*[]Mentor, error)
-
-	// FindById repository find mentors by id
 	FindById(id string) (*Mentor, error)
-
-	// FindByIdUser repository find mentors by id user
 	FindByIdUser(userId string) (*Mentor, error)
-
-	// Update repository edit data mentors
 	Update(id string, mentorDomain *Mentor) error
 }
 
-type MentorUsecase interface {
-	// Register usecase mentors register
+type MentorUseCase interface {
 	Register(mentorAuth *MentorRegister) error
-
-	// ForgotPassword usecase mentor verify forgot password
 	ForgotPassword(forgotPassword *MentorForgotPassword) error
-
-	// UpdatePassword usecase mentor to chnge password
 	UpdatePassword(updatePassword *MentorUpdatePassword) error
-
-	// Login usecase mentor login
 	Login(mentorAuth *MentorAuth) (interface{}, error)
-
-	// FindAll usecase find all mentors
 	FindAll() (*[]Mentor, error)
-
-	// FindById usecase find by id mentors
 	FindById(id string) (*Mentor, error)
-
-	// Update usecase edit data mentors
 	Update(id string, updateMentor *MentorUpdateProfile) error
 }

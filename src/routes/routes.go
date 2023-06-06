@@ -2,7 +2,13 @@ package routes
 
 import (
 	"github.com/go-redis/redis/v8"
-	"github.com/superosystem/trainingsystem-backend/src/config"
+	"github.com/labstack/echo/v4"
+	"github.com/superosystem/trainingsystem-backend/src/common/config"
+	"github.com/superosystem/trainingsystem-backend/src/middlewares"
+	"gorm.io/gorm"
+
+	_repository "github.com/superosystem/trainingsystem-backend/src/repository"
+	_use_case "github.com/superosystem/trainingsystem-backend/src/usecase"
 
 	_assignmentController "github.com/superosystem/trainingsystem-backend/src/controllers/assignments"
 	_categoryController "github.com/superosystem/trainingsystem-backend/src/controllers/categories"
@@ -19,16 +25,6 @@ import (
 	_moduleController "github.com/superosystem/trainingsystem-backend/src/controllers/modules"
 	_otpController "github.com/superosystem/trainingsystem-backend/src/controllers/otp"
 	_reviewController "github.com/superosystem/trainingsystem-backend/src/controllers/reviews"
-
-	_use_case "github.com/superosystem/trainingsystem-backend/src/usecase"
-
-	_driver_mysql "github.com/superosystem/trainingsystem-backend/src/drivers/mysql"
-	_driver_redis "github.com/superosystem/trainingsystem-backend/src/drivers/redis"
-
-	"github.com/superosystem/trainingsystem-backend/src/middleware"
-
-	"github.com/labstack/echo/v4"
-	"gorm.io/gorm"
 )
 
 type RouteConfig struct {
@@ -55,79 +51,79 @@ func (routeConfig *RouteConfig) New() {
 	// setup api v1
 	v1 := routeConfig.Echo.Group("/api/v1")
 
-	// setup auth middleware
-	authMiddleware := middleware.NewAuthMiddleware(routeConfig.JWTConfig)
+	// setup auth middlewares
+	authMiddleware := middlewares.NewAuthMiddleware(routeConfig.JWTConfig)
 
 	// Inject the dependency to user
-	userRepository := _driver_mysql.NewUserRepository(routeConfig.MySQLDB)
+	userRepository := _repository.NewUserRepository(routeConfig.MySQLDB)
 
 	// Inject the dependency to otp
-	otpRepository := _driver_redis.NewOtpRepository(routeConfig.RedisDB)
-	otpUsecase := _use_case.NewOTPUsecase(otpRepository, userRepository, routeConfig.Mailer)
-	otpController := _otpController.NewOTPController(otpUsecase)
+	otpRepository := _repository.NewOtpRepository(routeConfig.RedisDB)
+	otpUseCase := _use_case.NewOTPUseCase(otpRepository, userRepository, routeConfig.Mailer)
+	otpController := _otpController.NewOTPController(otpUseCase)
 
 	// Inject the dependency to mentee
-	menteeRepository := _driver_mysql.NewMenteeRepository(routeConfig.MySQLDB)
-	menteeUsecase := _use_case.NewMenteeUsecase(menteeRepository, userRepository, otpRepository, routeConfig.JWTConfig, routeConfig.Mailer, routeConfig.StorageConfig)
-	menteeController := _menteeController.NewMenteeController(menteeUsecase, routeConfig.JWTConfig)
+	menteeRepository := _repository.NewMenteeRepository(routeConfig.MySQLDB)
+	menteeUseCase := _use_case.NewMenteeUseCase(menteeRepository, userRepository, otpRepository, routeConfig.JWTConfig, routeConfig.Mailer, routeConfig.StorageConfig)
+	menteeController := _menteeController.NewMenteeController(menteeUseCase, routeConfig.JWTConfig)
 
 	// Inject the dependency to mentor
-	mentorRepository := _driver_mysql.NewMentorRepository(routeConfig.MySQLDB)
-	mentorUsecase := _use_case.NewMentorUsecase(mentorRepository, userRepository, routeConfig.JWTConfig, routeConfig.StorageConfig, routeConfig.Mailer)
-	mentorController := _mentorController.NewMentorController(mentorUsecase, routeConfig.JWTConfig)
+	mentorRepository := _repository.NewMentorRepository(routeConfig.MySQLDB)
+	mentorUseCase := _use_case.NewMentorUseCase(mentorRepository, userRepository, routeConfig.JWTConfig, routeConfig.StorageConfig, routeConfig.Mailer)
+	mentorController := _mentorController.NewMentorController(mentorUseCase, routeConfig.JWTConfig)
 
 	// Inject the dependency to category
-	categoryRepository := _driver_mysql.NewCategoryRepository(routeConfig.MySQLDB)
-	categoryUsecase := _use_case.NewCategoryUsecase(categoryRepository)
-	categoryController := _categoryController.NewCategoryController(categoryUsecase)
+	categoryRepository := _repository.NewCategoryRepository(routeConfig.MySQLDB)
+	categoryUseCase := _use_case.NewCategoryUseCase(categoryRepository)
+	categoryController := _categoryController.NewCategoryController(categoryUseCase)
 
 	// Inject the dependency to course
-	courseRepository := _driver_mysql.NewCourseRepository(routeConfig.MySQLDB)
-	courseUsecase := _use_case.NewCourseUsecase(courseRepository, mentorRepository, categoryRepository, routeConfig.StorageConfig)
-	courseController := _courseController.NewCourseController(courseUsecase)
+	courseRepository := _repository.NewCourseRepository(routeConfig.MySQLDB)
+	courseUseCase := _use_case.NewCourseUseCase(courseRepository, mentorRepository, categoryRepository, routeConfig.StorageConfig)
+	courseController := _courseController.NewCourseController(courseUseCase)
 
 	// Inject the dependency to module
-	moduleRepository := _driver_mysql.NewModuleRepository(routeConfig.MySQLDB)
-	moduleUsecase := _use_case.NewModuleUsecase(moduleRepository, courseRepository)
-	moduleController := _moduleController.NewModuleController(moduleUsecase)
+	moduleRepository := _repository.NewModuleRepository(routeConfig.MySQLDB)
+	moduleUseCase := _use_case.NewModuleUseCase(moduleRepository, courseRepository)
+	moduleController := _moduleController.NewModuleController(moduleUseCase)
 
 	// Inject the dependency to assignment
-	assignmentRepository := _driver_mysql.NewAssignmentRepository(routeConfig.MySQLDB)
-	assignmentUsecase := _use_case.NewAssignmentUsecase(assignmentRepository, courseRepository)
-	assignmentController := _assignmentController.NewAssignmentsController(assignmentUsecase)
+	assignmentRepository := _repository.NewAssignmentRepository(routeConfig.MySQLDB)
+	assignmentUseCase := _use_case.NewAssignmentUseCase(assignmentRepository, courseRepository)
+	assignmentController := _assignmentController.NewAssignmentsController(assignmentUseCase)
 
 	// Inject the dependency to material
-	materialRepository := _driver_mysql.NewMaterialRepository(routeConfig.MySQLDB)
-	materialUsecase := _use_case.NewMaterialUsecase(materialRepository, moduleRepository, routeConfig.StorageConfig)
-	materialController := _materialController.NewMaterialController(materialUsecase)
+	materialRepository := _repository.NewMaterialRepository(routeConfig.MySQLDB)
+	materialUseCase := _use_case.NewMaterialUseCase(materialRepository, moduleRepository, routeConfig.StorageConfig)
+	materialController := _materialController.NewMaterialController(materialUseCase)
 
 	// Inject the dependency to menteeProgress
-	menteeProgressRepository := _driver_mysql.NewMenteeProgressRepository(routeConfig.MySQLDB)
-	menteeProgressUsecase := _use_case.NewMenteeProgressUsecase(menteeProgressRepository, menteeRepository, courseRepository, materialRepository)
-	menteeProgressController := _menteeProgressController.NewMenteeProgressController(menteeProgressUsecase)
+	menteeProgressRepository := _repository.NewMenteeProgressRepository(routeConfig.MySQLDB)
+	menteeProgressUseCase := _use_case.NewMenteeProgressUseCase(menteeProgressRepository, menteeRepository, courseRepository, materialRepository)
+	menteeProgressController := _menteeProgressController.NewMenteeProgressController(menteeProgressUseCase)
 
 	// Inject the dependency to mentee assignment
-	menteeAssignmentRepository := _driver_mysql.NewMenteeAssignmentRepository(routeConfig.MySQLDB)
-	menteeAssignmentUsecase := _use_case.NewMenteeAssignmentUsecase(menteeAssignmentRepository, assignmentRepository, menteeRepository, routeConfig.StorageConfig)
-	menteeAssignmentController := _assignmentMenteeController.NewAssignmentsMenteeController(menteeAssignmentUsecase, routeConfig.JWTConfig)
+	menteeAssignmentRepository := _repository.NewMenteeAssignmentRepository(routeConfig.MySQLDB)
+	menteeAssignmentUseCase := _use_case.NewMenteeAssignmentUseCase(menteeAssignmentRepository, assignmentRepository, menteeRepository, routeConfig.StorageConfig)
+	menteeAssignmentController := _assignmentMenteeController.NewAssignmentsMenteeController(menteeAssignmentUseCase, routeConfig.JWTConfig)
 
 	// Inject the dependency to menteeCourse
-	menteeCourseRepository := _driver_mysql.NewMenteeCourseRepository(routeConfig.MySQLDB)
-	menteeCourseUsecase := _use_case.NewMenteeCourseUsecase(menteeCourseRepository, menteeRepository, courseRepository, materialRepository, menteeProgressRepository, assignmentRepository, menteeAssignmentRepository)
-	menteeCourseController := _menteeCoursesController.NewMenteeCourseController(menteeCourseUsecase)
+	menteeCourseRepository := _repository.NewMenteeCourseRepository(routeConfig.MySQLDB)
+	menteeCourseUseCase := _use_case.NewMenteeCourseUseCase(menteeCourseRepository, menteeRepository, courseRepository, materialRepository, menteeProgressRepository, assignmentRepository, menteeAssignmentRepository)
+	menteeCourseController := _menteeCoursesController.NewMenteeCourseController(menteeCourseUseCase)
 
-	detailCourseUsecase := _use_case.NewDetailCourseUsecase(menteeRepository, courseRepository, moduleRepository, materialRepository, menteeProgressRepository, assignmentRepository, menteeAssignmentRepository, menteeCourseRepository)
-	detailCourseController := _detailCourseController.NewDetailCourseController(detailCourseUsecase)
+	detailCourseUseCase := _use_case.NewDetailCourseUseCase(menteeRepository, courseRepository, moduleRepository, materialRepository, menteeProgressRepository, assignmentRepository, menteeAssignmentRepository, menteeCourseRepository)
+	detailCourseController := _detailCourseController.NewDetailCourseController(detailCourseUseCase)
 
-	manageMenteeUsecase := _use_case.NewManageMenteeUsecase(menteeCourseRepository, menteeProgressRepository, menteeAssignmentRepository, routeConfig.StorageConfig)
-	manageMenteeController := _manageMenteesController.NewManageMenteeController(manageMenteeUsecase)
+	manageMenteeUseCase := _use_case.NewManageMenteeUseCase(menteeCourseRepository, menteeProgressRepository, menteeAssignmentRepository, routeConfig.StorageConfig)
+	manageMenteeController := _manageMenteesController.NewManageMenteeController(manageMenteeUseCase)
 
-	reviewRepository := _driver_mysql.NewReviewRepository(routeConfig.MySQLDB)
-	reviewUsecase := _use_case.NewReviewUsecase(reviewRepository, menteeCourseRepository, menteeRepository, courseRepository)
-	reviewController := _reviewController.NewReviewController(reviewUsecase)
+	reviewRepository := _repository.NewReviewRepository(routeConfig.MySQLDB)
+	reviewUseCase := _use_case.NewReviewUseCase(reviewRepository, menteeCourseRepository, menteeRepository, courseRepository)
+	reviewController := _reviewController.NewReviewController(reviewUseCase)
 
-	certificateUsecase := _use_case.NewCertificateUsecase(menteeRepository, courseRepository)
-	certificateController := _certificateController.NewCertificateController(certificateUsecase)
+	certificateUseCase := _use_case.NewCertificateUseCase(menteeRepository, courseRepository)
+	certificateController := _certificateController.NewCertificateController(certificateUseCase)
 
 	// authentication routes
 	auth := v1.Group("/auth")

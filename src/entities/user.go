@@ -1,9 +1,8 @@
 package entities
 
 import (
-	"time"
-
 	"github.com/superosystem/trainingsystem-backend/src/domain"
+	"time"
 )
 
 type User struct {

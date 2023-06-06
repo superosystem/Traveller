@@ -5,17 +5,17 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
+	"github.com/superosystem/trainingsystem-backend/src/common/helper"
 	"github.com/superosystem/trainingsystem-backend/src/domain"
-	"github.com/superosystem/trainingsystem-backend/src/helper"
 )
 
 type ManageMenteeController struct {
-	manageMenteeUsecase domain.ManageMenteeUsecase
+	manageMenteeUseCase domain.ManageMenteeUseCase
 }
 
-func NewManageMenteeController(manageMenteeUsecase domain.ManageMenteeUsecase) *ManageMenteeController {
+func NewManageMenteeController(manageMenteeUseCase domain.ManageMenteeUseCase) *ManageMenteeController {
 	return &ManageMenteeController{
-		manageMenteeUsecase: manageMenteeUsecase,
+		manageMenteeUseCase: manageMenteeUseCase,
 	}
 }
 
@@ -23,7 +23,7 @@ func (ctrl *ManageMenteeController) HandlerDeleteAccessMentee(c echo.Context) er
 	courseId := c.Param("courseId")
 	menteeId := c.Param("menteeId")
 
-	err := ctrl.manageMenteeUsecase.DeleteAccess(menteeId, courseId)
+	err := ctrl.manageMenteeUseCase.DeleteAccess(menteeId, courseId)
 
 	if err != nil {
 		if errors.Is(err, helper.ErrRecordNotFound) {

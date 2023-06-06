@@ -5,22 +5,22 @@ import (
 	"github.com/superosystem/trainingsystem-backend/src/domain"
 )
 
-type moduleUsecase struct {
+type moduleUseCase struct {
 	moduleRepository domain.ModuleRepository
 	courseRepository domain.CourseRepository
 }
 
-func NewModuleUsecase(
+func NewModuleUseCase(
 	moduleRepository domain.ModuleRepository,
 	courseRepository domain.CourseRepository,
-) domain.ModuleUsecase {
-	return moduleUsecase{
+) domain.ModuleUseCase {
+	return moduleUseCase{
 		moduleRepository: moduleRepository,
 		courseRepository: courseRepository,
 	}
 }
 
-func (mu moduleUsecase) Create(moduleDomain *domain.Module) error {
+func (mu moduleUseCase) Create(moduleDomain *domain.Module) error {
 	if _, err := mu.courseRepository.FindById(moduleDomain.CourseId); err != nil {
 		return err
 	}
@@ -33,7 +33,6 @@ func (mu moduleUsecase) Create(moduleDomain *domain.Module) error {
 	}
 
 	err := mu.moduleRepository.Create(&module)
-
 	if err != nil {
 		return err
 	}
@@ -41,9 +40,8 @@ func (mu moduleUsecase) Create(moduleDomain *domain.Module) error {
 	return nil
 }
 
-func (mu moduleUsecase) FindById(moduleId string) (*domain.Module, error) {
+func (mu moduleUseCase) FindById(moduleId string) (*domain.Module, error) {
 	module, err := mu.moduleRepository.FindById(moduleId)
-
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +49,7 @@ func (mu moduleUsecase) FindById(moduleId string) (*domain.Module, error) {
 	return module, nil
 }
 
-func (mu moduleUsecase) Update(moduleId string, moduleDomain *domain.Module) error {
+func (mu moduleUseCase) Update(moduleId string, moduleDomain *domain.Module) error {
 	if _, err := mu.courseRepository.FindById(moduleDomain.CourseId); err != nil {
 		return err
 	}
@@ -61,7 +59,6 @@ func (mu moduleUsecase) Update(moduleId string, moduleDomain *domain.Module) err
 	}
 
 	err := mu.moduleRepository.Update(moduleId, moduleDomain)
-
 	if err != nil {
 		return err
 	}
@@ -69,13 +66,12 @@ func (mu moduleUsecase) Update(moduleId string, moduleDomain *domain.Module) err
 	return nil
 }
 
-func (mu moduleUsecase) Delete(moduleId string) error {
+func (mu moduleUseCase) Delete(moduleId string) error {
 	if _, err := mu.moduleRepository.FindById(moduleId); err != nil {
 		return err
 	}
 
 	err := mu.moduleRepository.Delete(moduleId)
-
 	if err != nil {
 		return err
 	}

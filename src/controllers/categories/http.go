@@ -5,19 +5,19 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
+	"github.com/superosystem/trainingsystem-backend/src/common/helper"
 	"github.com/superosystem/trainingsystem-backend/src/controllers/categories/request"
 	"github.com/superosystem/trainingsystem-backend/src/controllers/categories/response"
 	"github.com/superosystem/trainingsystem-backend/src/domain"
-	"github.com/superosystem/trainingsystem-backend/src/helper"
 )
 
 type CategoryController struct {
-	categoryUsecase domain.CategoryUsecase
+	categoryUseCase domain.CategoryUseCase
 }
 
-func NewCategoryController(categoryUsecase domain.CategoryUsecase) *CategoryController {
+func NewCategoryController(categoryUseCase domain.CategoryUseCase) *CategoryController {
 	return &CategoryController{
-		categoryUsecase: categoryUsecase,
+		categoryUseCase: categoryUseCase,
 	}
 }
 
@@ -32,7 +32,7 @@ func (ctrl *CategoryController) HandlerCreateCategory(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, helper.BadRequestResponse(err.Error()))
 	}
 
-	err := ctrl.categoryUsecase.Create(categoryInput.ToDomain())
+	err := ctrl.categoryUseCase.Create(categoryInput.ToDomain())
 
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, helper.InternalServerErrorResponse(helper.ErrInternalServerError.Error()))
@@ -42,7 +42,7 @@ func (ctrl *CategoryController) HandlerCreateCategory(c echo.Context) error {
 }
 
 func (ctrl *CategoryController) HandlerFindAllCategories(c echo.Context) error {
-	categoriesDomain, err := ctrl.categoryUsecase.FindAll()
+	categoriesDomain, err := ctrl.categoryUseCase.FindAll()
 
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, helper.InternalServerErrorResponse(helper.ErrInternalServerError.Error()))
@@ -60,7 +60,7 @@ func (ctrl *CategoryController) HandlerFindAllCategories(c echo.Context) error {
 func (ctrl *CategoryController) HandlerFindByIdCategory(c echo.Context) error {
 	id := c.Param("categoryId")
 
-	category, err := ctrl.categoryUsecase.FindById(id)
+	category, err := ctrl.categoryUseCase.FindById(id)
 
 	if err != nil {
 		if errors.Is(err, helper.ErrCategoryNotFound) {
@@ -86,7 +86,7 @@ func (ctrl *CategoryController) HandlerUpdateCategory(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, helper.BadRequestResponse(err.Error()))
 	}
 
-	err := ctrl.categoryUsecase.Update(id, categoryInput.ToDomain())
+	err := ctrl.categoryUseCase.Update(id, categoryInput.ToDomain())
 
 	if err != nil {
 		if errors.Is(err, helper.ErrCategoryNotFound) {

@@ -5,19 +5,19 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
+	"github.com/superosystem/trainingsystem-backend/src/common/helper"
 	"github.com/superosystem/trainingsystem-backend/src/controllers/menteeProgresses/request"
 	"github.com/superosystem/trainingsystem-backend/src/controllers/menteeProgresses/response"
 	"github.com/superosystem/trainingsystem-backend/src/domain"
-	"github.com/superosystem/trainingsystem-backend/src/helper"
 )
 
 type MenteeProgressController struct {
-	menteeProgressUsecase domain.MenteeProgressUsecase
+	menteeProgressUseCase domain.MenteeProgressUseCase
 }
 
-func NewMenteeProgressController(menteeProgressUsecase domain.MenteeProgressUsecase) *MenteeProgressController {
+func NewMenteeProgressController(menteeProgressUseCase domain.MenteeProgressUseCase) *MenteeProgressController {
 	return &MenteeProgressController{
-		menteeProgressUsecase: menteeProgressUsecase,
+		menteeProgressUseCase: menteeProgressUseCase,
 	}
 }
 
@@ -32,7 +32,7 @@ func (ctrl *MenteeProgressController) HandlerAddProgress(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, helper.BadRequestResponse(err.Error()))
 	}
 
-	err := ctrl.menteeProgressUsecase.Add(menteeProgressInput.ToDomain())
+	err := ctrl.menteeProgressUseCase.Add(menteeProgressInput.ToDomain())
 
 	if err != nil {
 		if errors.Is(err, helper.ErrMenteeNotFound) {
@@ -53,7 +53,7 @@ func (ctrl *MenteeProgressController) HandlerFindMaterialEnrolled(c echo.Context
 	menteeId := c.Param("menteeId")
 	materialId := c.Param("materialId")
 
-	progress, err := ctrl.menteeProgressUsecase.FindMaterialEnrolled(menteeId, materialId)
+	progress, err := ctrl.menteeProgressUseCase.FindMaterialEnrolled(menteeId, materialId)
 
 	if err != nil {
 		if errors.Is(err, helper.ErrMenteeNotFound) {

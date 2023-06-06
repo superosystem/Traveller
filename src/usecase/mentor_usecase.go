@@ -3,16 +3,15 @@ package usecase
 import (
 	"context"
 	"fmt"
+	"github.com/google/uuid"
+	"github.com/superosystem/trainingsystem-backend/src/common/config"
+	"github.com/superosystem/trainingsystem-backend/src/common/helper"
+	"github.com/superosystem/trainingsystem-backend/src/domain"
 	"path/filepath"
 	"time"
-
-	"github.com/google/uuid"
-	"github.com/superosystem/trainingsystem-backend/src/config"
-	"github.com/superosystem/trainingsystem-backend/src/domain"
-	"github.com/superosystem/trainingsystem-backend/src/helper"
 )
 
-type mentorUsecase struct {
+type mentorUseCase struct {
 	mentorsRepository domain.MentorRepository
 	userRepository    domain.UserRepository
 	jwtConfig         *config.JWTConfig
@@ -20,14 +19,14 @@ type mentorUsecase struct {
 	mailerConfig      *config.MailerConfig
 }
 
-func NewMentorUsecase(
+func NewMentorUseCase(
 	mentorsRepository domain.MentorRepository,
 	userRepository domain.UserRepository,
 	jwtConfig *config.JWTConfig,
 	storage *config.StorageConfig,
 	mailerConfig *config.MailerConfig,
-) domain.MentorUsecase {
-	return mentorUsecase{
+) domain.MentorUseCase {
+	return mentorUseCase{
 		mentorsRepository: mentorsRepository,
 		userRepository:    userRepository,
 		jwtConfig:         jwtConfig,
@@ -36,7 +35,7 @@ func NewMentorUsecase(
 	}
 }
 
-func (m mentorUsecase) Register(mentorDomain *domain.MentorRegister) error {
+func (m mentorUseCase) Register(mentorDomain *domain.MentorRegister) error {
 	var err error
 
 	if len(mentorDomain.Password) < 6 {
@@ -44,7 +43,6 @@ func (m mentorUsecase) Register(mentorDomain *domain.MentorRegister) error {
 	}
 
 	email, _ := m.userRepository.FindByEmail(mentorDomain.Email)
-
 	if email != nil {
 		return helper.ErrEmailAlreadyExist
 	}
@@ -61,7 +59,6 @@ func (m mentorUsecase) Register(mentorDomain *domain.MentorRegister) error {
 	}
 
 	err = m.userRepository.Create(&user)
-
 	if err != nil {
 		return err
 	}
@@ -78,7 +75,6 @@ func (m mentorUsecase) Register(mentorDomain *domain.MentorRegister) error {
 	}
 
 	err = m.mentorsRepository.Create(&mentor)
-
 	if err != nil {
 		return err
 	}
@@ -86,7 +82,7 @@ func (m mentorUsecase) Register(mentorDomain *domain.MentorRegister) error {
 	return nil
 }
 
-func (m mentorUsecase) Login(mentorAuth *domain.MentorAuth) (interface{}, error) {
+func (m mentorUseCase) Login(mentorAuth *domain.MentorAuth) (interface{}, error) {
 	if len(mentorAuth.Password) < 6 {
 		return nil, helper.ErrPasswordLengthInvalid
 	}
@@ -94,8 +90,8 @@ func (m mentorUsecase) Login(mentorAuth *domain.MentorAuth) (interface{}, error)
 	var err error
 
 	var user *domain.User
-	user, err = m.userRepository.FindByEmail(mentorAuth.Email)
 
+	user, err = m.userRepository.FindByEmail(mentorAuth.Email)
 	if err != nil {
 		return nil, err
 	}
@@ -106,8 +102,8 @@ func (m mentorUsecase) Login(mentorAuth *domain.MentorAuth) (interface{}, error)
 	}
 
 	var mentor *domain.Mentor
-	mentor, err = m.mentorsRepository.FindByIdUser(user.ID)
 
+	mentor, err = m.mentorsRepository.FindByIdUser(user.ID)
 	if err != nil {
 		return nil, err
 	}
@@ -116,7 +112,6 @@ func (m mentorUsecase) Login(mentorAuth *domain.MentorAuth) (interface{}, error)
 	exp := time.Now().Add(6 * time.Hour)
 
 	token, err = m.jwtConfig.GenerateToken(user.ID, mentor.ID, mentor.Role, exp)
-
 	if err != nil {
 		return nil, err
 	}
@@ -129,14 +124,13 @@ func (m mentorUsecase) Login(mentorAuth *domain.MentorAuth) (interface{}, error)
 	return data, nil
 }
 
-func (m mentorUsecase) UpdatePassword(updatePassword *domain.MentorUpdatePassword) error {
+func (m mentorUseCase) UpdatePassword(updatePassword *domain.MentorUpdatePassword) error {
 
 	if len(updatePassword.NewPassword) < 8 {
 		return helper.ErrPasswordLengthInvalid
 	}
 
 	oldPassword, err := m.userRepository.FindById(updatePassword.UserID)
-
 	if err != nil {
 		return helper.ErrUserNotFound
 	}
@@ -153,7 +147,6 @@ func (m mentorUsecase) UpdatePassword(updatePassword *domain.MentorUpdatePasswor
 	}
 
 	err = m.userRepository.Update(oldPassword.ID, &updatedUser)
-
 	if err != nil {
 		return err
 	}
@@ -162,11 +155,10 @@ func (m mentorUsecase) UpdatePassword(updatePassword *domain.MentorUpdatePasswor
 
 }
 
-func (m mentorUsecase) FindAll() (*[]domain.Mentor, error) {
+func (m mentorUseCase) FindAll() (*[]domain.Mentor, error) {
 	var err error
 
 	mentor, err := m.mentorsRepository.FindAll()
-
 	if err != nil {
 		if err == helper.ErrMentorNotFound {
 			return nil, helper.ErrMentorNotFound
@@ -178,8 +170,7 @@ func (m mentorUsecase) FindAll() (*[]domain.Mentor, error) {
 	return mentor, nil
 }
 
-func (m mentorUsecase) FindById(id string) (*domain.Mentor, error) {
-
+func (m mentorUseCase) FindById(id string) (*domain.Mentor, error) {
 	mentor, err := m.mentorsRepository.FindById(id)
 	if err != nil {
 		if err == helper.ErrMentorNotFound {
@@ -192,12 +183,12 @@ func (m mentorUsecase) FindById(id string) (*domain.Mentor, error) {
 	return mentor, nil
 }
 
-func (m mentorUsecase) Update(id string, updateMentor *domain.MentorUpdateProfile) error {
+func (m mentorUseCase) Update(id string, updateMentor *domain.MentorUpdateProfile) error {
 	_, err := m.userRepository.FindById(updateMentor.UserID)
-
 	if err != nil {
 		return err
 	}
+
 	user := domain.User{
 		ID:        updateMentor.UserID,
 		Email:     updateMentor.Email,
@@ -211,7 +202,6 @@ func (m mentorUsecase) Update(id string, updateMentor *domain.MentorUpdateProfil
 	}
 
 	mentor, err := m.mentorsRepository.FindById(id)
-
 	if err != nil {
 		return err
 	}
@@ -228,7 +218,6 @@ func (m mentorUsecase) Update(id string, updateMentor *domain.MentorUpdateProfil
 		}
 
 		ProfilePicture, err := updateMentor.ProfilePictureFile.Open()
-
 		if err != nil {
 			return err
 		}
@@ -236,7 +225,6 @@ func (m mentorUsecase) Update(id string, updateMentor *domain.MentorUpdateProfil
 		defer ProfilePicture.Close()
 
 		extension := filepath.Ext(updateMentor.ProfilePictureFile.Filename)
-
 		if extension != ".jpg" && extension != ".png" && extension != ".jpeg" {
 			return helper.ErrUnsupportedImageFile
 		}
@@ -244,7 +232,6 @@ func (m mentorUsecase) Update(id string, updateMentor *domain.MentorUpdateProfil
 		filename, _ := helper.GetFilename(updateMentor.ProfilePictureFile.Filename)
 
 		ProfilePictureURL, err = m.storage.UploadImage(ctx, filename, ProfilePicture)
-
 		if err != nil {
 			return err
 		}
@@ -275,11 +262,10 @@ func (m mentorUsecase) Update(id string, updateMentor *domain.MentorUpdateProfil
 	return nil
 }
 
-func (m mentorUsecase) ForgotPassword(forgotPassword *domain.MentorForgotPassword) error {
+func (m mentorUseCase) ForgotPassword(forgotPassword *domain.MentorForgotPassword) error {
 	var err error
 
 	user, err := m.userRepository.FindByEmail(forgotPassword.Email)
-
 	if err != nil {
 		return err
 	}
@@ -292,7 +278,6 @@ func (m mentorUsecase) ForgotPassword(forgotPassword *domain.MentorForgotPasswor
 	}
 
 	err = m.userRepository.Update(user.ID, &updatedUser)
-
 	if err != nil {
 		return err
 	}

@@ -3,18 +3,16 @@ package usecase
 import (
 	"context"
 	"fmt"
+	"github.com/google/uuid"
+	"github.com/superosystem/trainingsystem-backend/src/common/config"
+	"github.com/superosystem/trainingsystem-backend/src/common/helper"
+	"github.com/superosystem/trainingsystem-backend/src/domain"
 	"math"
 	"path/filepath"
 	"time"
-
-	"github.com/google/uuid"
-
-	"github.com/superosystem/trainingsystem-backend/src/config"
-	"github.com/superosystem/trainingsystem-backend/src/domain"
-	"github.com/superosystem/trainingsystem-backend/src/helper"
 )
 
-type menteeUsecase struct {
+type menteeUseCase struct {
 	menteeRepository domain.MenteeRepository
 	userRepository   domain.UserRepository
 	otpRepository    domain.OtpRepository
@@ -23,15 +21,15 @@ type menteeUsecase struct {
 	storage          *config.StorageConfig
 }
 
-func NewMenteeUsecase(
+func NewMenteeUseCase(
 	menteeRepository domain.MenteeRepository,
 	userRepository domain.UserRepository,
 	otpRepository domain.OtpRepository,
 	jwtConfig *config.JWTConfig,
 	mailerConfig *config.MailerConfig,
 	storage *config.StorageConfig,
-) domain.MenteeUsecase {
-	return menteeUsecase{
+) domain.MenteeUseCase {
+	return menteeUseCase{
 		menteeRepository: menteeRepository,
 		userRepository:   userRepository,
 		otpRepository:    otpRepository,
@@ -41,13 +39,12 @@ func NewMenteeUsecase(
 	}
 }
 
-func (m menteeUsecase) Register(menteeAuth *domain.MenteeAuth) error {
+func (m menteeUseCase) Register(menteeAuth *domain.MenteeAuth) error {
 	if len(menteeAuth.Password) < 6 {
 		return helper.ErrPasswordLengthInvalid
 	}
 
 	user, _ := m.userRepository.FindByEmail(menteeAuth.Email)
-
 	if user != nil {
 		return helper.ErrEmailAlreadyExist
 	}
@@ -59,7 +56,6 @@ func (m menteeUsecase) Register(menteeAuth *domain.MenteeAuth) error {
 	ctx := context.Background()
 
 	err = m.otpRepository.Save(ctx, menteeAuth.Email, newOTP, helper.TIME_TO_LIVE)
-
 	if err != nil {
 		return err
 	}
@@ -72,7 +68,7 @@ func (m menteeUsecase) Register(menteeAuth *domain.MenteeAuth) error {
 	return nil
 }
 
-func (m menteeUsecase) VerifyRegister(menteeDomain *domain.MenteeRegister) error {
+func (m menteeUseCase) VerifyRegister(menteeDomain *domain.MenteeRegister) error {
 	if len(menteeDomain.Password) < 6 {
 		return helper.ErrPasswordLengthInvalid
 	}
@@ -89,7 +85,6 @@ func (m menteeUsecase) VerifyRegister(menteeDomain *domain.MenteeRegister) error
 	var validOTP string
 
 	validOTP, err = m.otpRepository.Get(ctx, menteeDomain.Email)
-
 	if err != nil {
 		return err
 	}
@@ -110,7 +105,6 @@ func (m menteeUsecase) VerifyRegister(menteeDomain *domain.MenteeRegister) error
 	}
 
 	err = m.userRepository.Create(&user)
-
 	if err != nil {
 		return err
 	}
@@ -128,7 +122,6 @@ func (m menteeUsecase) VerifyRegister(menteeDomain *domain.MenteeRegister) error
 	}
 
 	err = m.menteeRepository.Create(&mentee)
-
 	if err != nil {
 		return err
 	}
@@ -136,7 +129,7 @@ func (m menteeUsecase) VerifyRegister(menteeDomain *domain.MenteeRegister) error
 	return nil
 }
 
-func (m menteeUsecase) ForgotPassword(forgotPassword *domain.MenteeForgotPassword) error {
+func (m menteeUseCase) ForgotPassword(forgotPassword *domain.MenteeForgotPassword) error {
 	var err error
 
 	if len(forgotPassword.Password) < 6 || len(forgotPassword.RepeatedPassword) < 6 {
@@ -145,7 +138,6 @@ func (m menteeUsecase) ForgotPassword(forgotPassword *domain.MenteeForgotPasswor
 
 	var user *domain.User
 	user, err = m.userRepository.FindByEmail(forgotPassword.Email)
-
 	if err != nil {
 		return err
 	}
@@ -154,7 +146,6 @@ func (m menteeUsecase) ForgotPassword(forgotPassword *domain.MenteeForgotPasswor
 	var result string
 
 	result, err = m.otpRepository.Get(ctx, forgotPassword.Email)
-
 	if err != nil {
 		return err
 	}
@@ -174,7 +165,6 @@ func (m menteeUsecase) ForgotPassword(forgotPassword *domain.MenteeForgotPasswor
 	}
 
 	err = m.userRepository.Update(user.ID, &updatedUser)
-
 	if err != nil {
 		return err
 	}
@@ -182,7 +172,7 @@ func (m menteeUsecase) ForgotPassword(forgotPassword *domain.MenteeForgotPasswor
 	return nil
 }
 
-func (m menteeUsecase) Login(menteeAuth *domain.MenteeAuth) (interface{}, error) {
+func (m menteeUseCase) Login(menteeAuth *domain.MenteeAuth) (interface{}, error) {
 	if len(menteeAuth.Password) < 6 {
 		return nil, helper.ErrPasswordLengthInvalid
 	}
@@ -190,8 +180,8 @@ func (m menteeUsecase) Login(menteeAuth *domain.MenteeAuth) (interface{}, error)
 	var err error
 
 	var user *domain.User
-	user, err = m.userRepository.FindByEmail(menteeAuth.Email)
 
+	user, err = m.userRepository.FindByEmail(menteeAuth.Email)
 	if err != nil {
 		return nil, err
 	}
@@ -203,7 +193,6 @@ func (m menteeUsecase) Login(menteeAuth *domain.MenteeAuth) (interface{}, error)
 
 	var mentee *domain.Mentee
 	mentee, err = m.menteeRepository.FindByIdUser(user.ID)
-
 	if err != nil {
 		return nil, err
 	}
@@ -212,7 +201,6 @@ func (m menteeUsecase) Login(menteeAuth *domain.MenteeAuth) (interface{}, error)
 	exp := time.Now().Add(6 * time.Hour)
 
 	token, err = m.jwtConfig.GenerateToken(user.ID, mentee.ID, mentee.Role, exp)
-
 	if err != nil {
 		return nil, err
 	}
@@ -225,11 +213,10 @@ func (m menteeUsecase) Login(menteeAuth *domain.MenteeAuth) (interface{}, error)
 	return data, nil
 }
 
-func (m menteeUsecase) FindAll() (*[]domain.Mentee, error) {
+func (m menteeUseCase) FindAll() (*[]domain.Mentee, error) {
 	var err error
 
 	mentees, err := m.menteeRepository.FindAll()
-
 	if err != nil {
 		if err == helper.ErrMenteeNotFound {
 			return nil, helper.ErrMenteeNotFound
@@ -241,7 +228,7 @@ func (m menteeUsecase) FindAll() (*[]domain.Mentee, error) {
 	return mentees, nil
 }
 
-func (m menteeUsecase) FindById(id string) (*domain.Mentee, error) {
+func (m menteeUseCase) FindById(id string) (*domain.Mentee, error) {
 	mentee, err := m.menteeRepository.FindById(id)
 	if err != nil {
 		if err == helper.ErrMenteeNotFound {
@@ -254,9 +241,8 @@ func (m menteeUsecase) FindById(id string) (*domain.Mentee, error) {
 	return mentee, nil
 }
 
-func (m menteeUsecase) FindByCourse(courseId string, pagination helper.Pagination) (*helper.Pagination, error) {
+func (m menteeUseCase) FindByCourse(courseId string, pagination helper.Pagination) (*helper.Pagination, error) {
 	mentees, totalRows, err := m.menteeRepository.FindByCourse(courseId, pagination.GetLimit(), pagination.GetOffset())
-
 	if err != nil {
 		return nil, err
 	}
@@ -268,9 +254,8 @@ func (m menteeUsecase) FindByCourse(courseId string, pagination helper.Paginatio
 	return &pagination, nil
 }
 
-func (m menteeUsecase) Update(id string, menteeDomain *domain.Mentee) error {
+func (m menteeUseCase) Update(id string, menteeDomain *domain.Mentee) error {
 	mentee, err := m.menteeRepository.FindById(id)
-
 	if err != nil {
 		return err
 	}
@@ -294,7 +279,6 @@ func (m menteeUsecase) Update(id string, menteeDomain *domain.Mentee) error {
 		defer ProfilePicture.Close()
 
 		extension := filepath.Ext(menteeDomain.ProfilePictureFile.Filename)
-
 		if extension != ".jpg" && extension != ".png" && extension != ".jpeg" {
 			return helper.ErrUnsupportedImageFile
 		}
@@ -302,7 +286,6 @@ func (m menteeUsecase) Update(id string, menteeDomain *domain.Mentee) error {
 		filename, _ := helper.GetFilename(menteeDomain.ProfilePictureFile.Filename)
 
 		ProfilePictureURL, err = m.storage.UploadImage(ctx, filename, ProfilePicture)
-
 		if err != nil {
 			return err
 		}

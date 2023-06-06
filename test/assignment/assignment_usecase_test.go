@@ -6,24 +6,24 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	mocks "github.com/gusrylmubarok/training-system/ts-backend/src/domain/mocks/repository"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
+	"github.com/superosystem/trainingsystem-backend/src/common/helper"
 	"github.com/superosystem/trainingsystem-backend/src/domain"
-	"github.com/superosystem/trainingsystem-backend/src/helper"
+	mocks "github.com/superosystem/trainingsystem-backend/src/domain/mocks/repository"
 	"github.com/superosystem/trainingsystem-backend/src/usecase"
 )
 
 var (
 	assignmentsRepository mocks.AssignmentRepository
 	courseRepository      mocks.CourseRepository
-	assignmentService     domain.AssignmentUsecase
+	assignmentService     domain.AssignmentUseCase
 	courseDomain          domain.Course
 	assignmentDomain      domain.Assignment
 )
 
 func TestMain(m *testing.M) {
-	assignmentService = usecase.NewAssignmentUsecase(&assignmentsRepository, &courseRepository)
+	assignmentService = usecase.NewAssignmentUseCase(&assignmentsRepository, &courseRepository)
 
 	courseDomain = domain.Course{
 		ID:          uuid.NewString(),

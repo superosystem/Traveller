@@ -2,12 +2,11 @@ package usecase
 
 import (
 	"github.com/google/uuid"
-
+	"github.com/superosystem/trainingsystem-backend/src/common/helper"
 	"github.com/superosystem/trainingsystem-backend/src/domain"
-	"github.com/superosystem/trainingsystem-backend/src/helper"
 )
 
-type menteeCourseUsecase struct {
+type menteeCourseUseCase struct {
 	menteeCourseRepository     domain.MenteeCourseRepository
 	menteeRepository           domain.MenteeRepository
 	courseRepository           domain.CourseRepository
@@ -17,7 +16,7 @@ type menteeCourseUsecase struct {
 	menteeAssignmentRepository domain.MenteeAssignmentRepository
 }
 
-func NewMenteeCourseUsecase(
+func NewMenteeCourseUseCase(
 	menteeCourseRepository domain.MenteeCourseRepository,
 	menteeRepository domain.MenteeRepository,
 	courseRepository domain.CourseRepository,
@@ -25,8 +24,8 @@ func NewMenteeCourseUsecase(
 	menteeProgressRepository domain.MenteeProgressRepository,
 	assignmentRepository domain.AssignmentRepository,
 	menteeAssignmentRepository domain.MenteeAssignmentRepository,
-) domain.MenteeCourseUsecase {
-	return menteeCourseUsecase{
+) domain.MenteeCourseUseCase {
+	return menteeCourseUseCase{
 		menteeCourseRepository:     menteeCourseRepository,
 		menteeRepository:           menteeRepository,
 		courseRepository:           courseRepository,
@@ -37,7 +36,7 @@ func NewMenteeCourseUsecase(
 	}
 }
 
-func (m menteeCourseUsecase) Enroll(menteeCourseDomain *domain.MenteeCourse) error {
+func (m menteeCourseUseCase) Enroll(menteeCourseDomain *domain.MenteeCourse) error {
 	if _, err := m.menteeRepository.FindById(menteeCourseDomain.MenteeId); err != nil {
 		return err
 	}
@@ -47,7 +46,6 @@ func (m menteeCourseUsecase) Enroll(menteeCourseDomain *domain.MenteeCourse) err
 	}
 
 	isEnrolled, _ := m.menteeCourseRepository.CheckEnrollment(menteeCourseDomain.MenteeId, menteeCourseDomain.CourseId)
-
 	if isEnrolled != nil {
 		return helper.ErrAlreadyEnrolled
 	}
@@ -68,9 +66,8 @@ func (m menteeCourseUsecase) Enroll(menteeCourseDomain *domain.MenteeCourse) err
 	return nil
 }
 
-func (m menteeCourseUsecase) FindMenteeCourses(menteeId string, title string, status string) (*[]domain.MenteeCourse, error) {
+func (m menteeCourseUseCase) FindMenteeCourses(menteeId string, title string, status string) (*[]domain.MenteeCourse, error) {
 	menteeCourses, err := m.menteeCourseRepository.FindCoursesByMentee(menteeId, title, status)
-
 	if err != nil {
 		return nil, err
 	}
@@ -82,13 +79,11 @@ func (m menteeCourseUsecase) FindMenteeCourses(menteeId string, title string, st
 	}
 
 	totalMaterials, err := m.materialRepository.CountByCourse(courseIds)
-
 	if err != nil {
 		return nil, err
 	}
 
 	progresses, err := m.menteeProgressRepository.Count(menteeId, title, status)
-
 	if err != nil {
 		return nil, err
 	}
@@ -126,7 +121,7 @@ func (m menteeCourseUsecase) FindMenteeCourses(menteeId string, title string, st
 	return menteeCourses, nil
 }
 
-func (m menteeCourseUsecase) CheckEnrollment(menteeId string, courseId string) (bool, error) {
+func (m menteeCourseUseCase) CheckEnrollment(menteeId string, courseId string) (bool, error) {
 	menteeCourseDomain, _ := m.menteeCourseRepository.CheckEnrollment(menteeId, courseId)
 
 	isEnrolled := menteeCourseDomain != nil
@@ -134,7 +129,7 @@ func (m menteeCourseUsecase) CheckEnrollment(menteeId string, courseId string) (
 	return isEnrolled, nil
 }
 
-func (m menteeCourseUsecase) CompleteCourse(menteeId string, courseId string) error {
+func (m menteeCourseUseCase) CompleteCourse(menteeId string, courseId string) error {
 	if _, err := m.menteeCourseRepository.CheckEnrollment(menteeId, courseId); err != nil {
 		return err
 	}
@@ -144,7 +139,6 @@ func (m menteeCourseUsecase) CompleteCourse(menteeId string, courseId string) er
 	}
 
 	err := m.menteeCourseRepository.Update(menteeId, courseId, &menteeCourse)
-
 	if err != nil {
 		return err
 	}

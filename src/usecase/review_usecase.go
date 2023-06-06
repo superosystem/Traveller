@@ -2,25 +2,24 @@ package usecase
 
 import (
 	"errors"
-
 	"github.com/google/uuid"
 	"github.com/superosystem/trainingsystem-backend/src/domain"
 )
 
-type reviewUsecase struct {
+type reviewUseCase struct {
 	reviewRepository       domain.ReviewRepository
 	menteeCourseRepository domain.MenteeCourseRepository
 	menteeRepository       domain.MenteeRepository
 	courseRepository       domain.CourseRepository
 }
 
-func NewReviewUsecase(
+func NewReviewUseCase(
 	reviewRepository domain.ReviewRepository,
 	menteeCourseRepository domain.MenteeCourseRepository,
 	menteeRepository domain.MenteeRepository,
 	courseRepository domain.CourseRepository,
-) domain.ReviewUsecase {
-	return reviewUsecase{
+) domain.ReviewUseCase {
+	return reviewUseCase{
 		reviewRepository:       reviewRepository,
 		menteeCourseRepository: menteeCourseRepository,
 		menteeRepository:       menteeRepository,
@@ -28,7 +27,7 @@ func NewReviewUsecase(
 	}
 }
 
-func (ru reviewUsecase) Create(reviewDomain *domain.Review) error {
+func (ru reviewUseCase) Create(reviewDomain *domain.Review) error {
 	if reviewDomain.Rating > 5 || reviewDomain.Rating < 1 {
 		return errors.New("invalid rating value")
 	}
@@ -60,13 +59,12 @@ func (ru reviewUsecase) Create(reviewDomain *domain.Review) error {
 	return nil
 }
 
-func (ru reviewUsecase) FindByCourse(courseId string) ([]domain.Review, error) {
+func (ru reviewUseCase) FindByCourse(courseId string) ([]domain.Review, error) {
 	if _, err := ru.courseRepository.FindById(courseId); err != nil {
 		return nil, err
 	}
 
 	reviews, err := ru.reviewRepository.FindByCourse(courseId)
-
 	if err != nil {
 		return nil, err
 	}
@@ -74,13 +72,12 @@ func (ru reviewUsecase) FindByCourse(courseId string) ([]domain.Review, error) {
 	return reviews, nil
 }
 
-func (ru reviewUsecase) FindByMentee(menteeId string, title string) ([]domain.Review, error) {
+func (ru reviewUseCase) FindByMentee(menteeId string, title string) ([]domain.Review, error) {
 	if _, err := ru.menteeRepository.FindById(menteeId); err != nil {
 		return nil, err
 	}
 
 	menteeCourses, err := ru.menteeCourseRepository.FindCoursesByMentee(menteeId, title, "completed")
-
 	if err != nil {
 		return nil, err
 	}

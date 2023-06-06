@@ -6,23 +6,23 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/superosystem/trainingsystem-backend/src/config"
+	"github.com/superosystem/trainingsystem-backend/src/common/config"
+	"github.com/superosystem/trainingsystem-backend/src/common/helper"
 	"github.com/superosystem/trainingsystem-backend/src/controllers/menteeAssignments/request"
 	"github.com/superosystem/trainingsystem-backend/src/controllers/menteeAssignments/response"
 	"github.com/superosystem/trainingsystem-backend/src/domain"
-	"github.com/superosystem/trainingsystem-backend/src/helper"
 
 	"github.com/labstack/echo/v4"
 )
 
 type AssignmentMenteeController struct {
-	assignmentMenteeUsecase domain.MenteeAssignmentUsecase
+	assignmentMenteeUseCase domain.MenteeAssignmentUseCase
 	jwtConfig               *config.JWTConfig
 }
 
-func NewAssignmentsMenteeController(assignmentMenteeUsecase domain.MenteeAssignmentUsecase, jwtConfig *config.JWTConfig) *AssignmentMenteeController {
+func NewAssignmentsMenteeController(assignmentMenteeUseCase domain.MenteeAssignmentUseCase, jwtConfig *config.JWTConfig) *AssignmentMenteeController {
 	return &AssignmentMenteeController{
-		assignmentMenteeUsecase: assignmentMenteeUsecase,
+		assignmentMenteeUseCase: assignmentMenteeUseCase,
 		jwtConfig:               jwtConfig,
 	}
 }
@@ -40,7 +40,7 @@ func (ctrl *AssignmentMenteeController) HandlerCreateMenteeAssignment(c echo.Con
 		return c.JSON(http.StatusBadRequest, helper.BadRequestResponse(helper.ErrInvalidRequest.Error()))
 	}
 
-	err := ctrl.assignmentMenteeUsecase.Create(assignmentMenteeInput.ToDomain())
+	err := ctrl.assignmentMenteeUseCase.Create(assignmentMenteeInput.ToDomain())
 
 	if err != nil {
 		if errors.Is(err, helper.ErrAssignmentNotFound) {
@@ -74,7 +74,7 @@ func (ctrl *AssignmentMenteeController) HandlerUpdateMenteeAssignment(c echo.Con
 		return c.JSON(http.StatusBadRequest, helper.BadRequestResponse(err.Error()))
 	}
 
-	err := ctrl.assignmentMenteeUsecase.Update(assignmentMenteeId, menteeAssignmentInput.ToDomain())
+	err := ctrl.assignmentMenteeUseCase.Update(assignmentMenteeId, menteeAssignmentInput.ToDomain())
 
 	if err != nil {
 		if errors.Is(err, helper.ErrAssignmentMenteeNotFound) {
@@ -102,7 +102,7 @@ func (ctrl *AssignmentMenteeController) HandlerUpdateGradeMentee(c echo.Context)
 		return c.JSON(http.StatusBadRequest, helper.BadRequestResponse(err.Error()))
 	}
 
-	err := ctrl.assignmentMenteeUsecase.Update(id, menteeAssignmentInput.ToDomain())
+	err := ctrl.assignmentMenteeUseCase.Update(id, menteeAssignmentInput.ToDomain())
 
 	if err != nil {
 		if errors.Is(err, helper.ErrAssignmentMenteeNotFound) {
@@ -118,7 +118,7 @@ func (ctrl *AssignmentMenteeController) HandlerUpdateGradeMentee(c echo.Context)
 func (ctrl *AssignmentMenteeController) HandlerFindByIdMenteeAssignment(c echo.Context) error {
 	id := c.Param("menteeAssignmentId")
 
-	assignmentMentee, err := ctrl.assignmentMenteeUsecase.FindById(id)
+	assignmentMentee, err := ctrl.assignmentMenteeUseCase.FindById(id)
 
 	if err != nil {
 		if errors.Is(err, helper.ErrAssignmentMenteeNotFound) {
@@ -142,7 +142,7 @@ func (ctrl *AssignmentMenteeController) HandlerFindByAssignmentId(c echo.Context
 		Page:  page,
 	}
 
-	res, err := ctrl.assignmentMenteeUsecase.FindByAssignmentId(id, pagination)
+	res, err := ctrl.assignmentMenteeUseCase.FindByAssignmentId(id, pagination)
 
 	if err != nil {
 		if errors.Is(err, helper.ErrAssignmentMenteeNotFound) {
@@ -168,7 +168,7 @@ func (ctrl *AssignmentMenteeController) HandlerFindByAssignmentId(c echo.Context
 func (ctrl *AssignmentMenteeController) HandlerFindByMenteeId(c echo.Context) error {
 	token, _ := ctrl.jwtConfig.ExtractToken(c)
 
-	menteeAssignment, err := ctrl.assignmentMenteeUsecase.FindByMenteeId(token.MenteeId)
+	menteeAssignment, err := ctrl.assignmentMenteeUseCase.FindByMenteeId(token.MenteeId)
 
 	if err != nil {
 		if errors.Is(err, helper.ErrAssignmentMenteeNotFound) {
@@ -192,7 +192,7 @@ func (ctrl *AssignmentMenteeController) HandlerFindMenteeAssignmentEnrolled(c ec
 	menteeId := c.Param("menteeId")
 	assignmentId := c.Param("assignmentId")
 
-	menteeAssignment, err := ctrl.assignmentMenteeUsecase.FindMenteeAssignmentEnrolled(menteeId, assignmentId)
+	menteeAssignment, err := ctrl.assignmentMenteeUseCase.FindMenteeAssignmentEnrolled(menteeId, assignmentId)
 
 	if err != nil {
 		if errors.Is(err, helper.ErrMenteeNotFound) {
@@ -210,7 +210,7 @@ func (ctrl *AssignmentMenteeController) HandlerFindMenteeAssignmentEnrolled(c ec
 func (ctrl *AssignmentMenteeController) HandlerSoftDeleteMenteeAssignment(c echo.Context) error {
 	id := c.Param("menteeAssignmentId")
 
-	err := ctrl.assignmentMenteeUsecase.Delete(id)
+	err := ctrl.assignmentMenteeUseCase.Delete(id)
 
 	if err != nil {
 		if errors.Is(err, helper.ErrAssignmentMenteeNotFound) {

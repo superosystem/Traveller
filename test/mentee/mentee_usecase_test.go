@@ -8,16 +8,16 @@ import (
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
-	"github.com/superosystem/trainingsystem-backend/src/config"
+	"github.com/superosystem/trainingsystem-backend/src/common/config"
+	"github.com/superosystem/trainingsystem-backend/src/common/helper"
 	"github.com/superosystem/trainingsystem-backend/src/domain"
 	mocks "github.com/superosystem/trainingsystem-backend/src/domain/mocks/repository"
-	"github.com/superosystem/trainingsystem-backend/src/helper"
 	"github.com/superosystem/trainingsystem-backend/src/usecase"
 )
 
 var (
 	menteeRepository     mocks.MenteeRepository
-	menteeService        domain.MenteeUsecase
+	menteeService        domain.MenteeUseCase
 	otpRepository        mocks.OtpRepository
 	userRepository       mocks.UserRepository
 	jwtConfig            config.JWTConfig
@@ -33,7 +33,7 @@ var (
 )
 
 func TestMain(m *testing.M) {
-	menteeService = usecase.NewMenteeUsecase(&menteeRepository, &userRepository, &otpRepository, &jwtConfig, &mailerConfig, &storage)
+	menteeService = usecase.NewMenteeUseCase(&menteeRepository, &userRepository, &otpRepository, &jwtConfig, &mailerConfig, &storage)
 
 	userDomain = domain.User{
 		ID:        uuid.NewString(),

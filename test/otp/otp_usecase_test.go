@@ -6,12 +6,12 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	mocks "github.com/gusrylmubarok/training-system/ts-backend/src/domain/mocks/repository"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
-	"github.com/superosystem/trainingsystem-backend/src/config"
+	"github.com/superosystem/trainingsystem-backend/src/common/config"
+	"github.com/superosystem/trainingsystem-backend/src/common/helper"
 	"github.com/superosystem/trainingsystem-backend/src/domain"
-	"github.com/superosystem/trainingsystem-backend/src/helper"
+	mocks "github.com/superosystem/trainingsystem-backend/src/domain/mocks/repository"
 	"github.com/superosystem/trainingsystem-backend/src/usecase"
 )
 
@@ -19,13 +19,13 @@ var (
 	otpRepository  mocks.OtpRepository
 	userRepository mocks.UserRepository
 	mailerConfig   config.MailerConfig
-	otpService     domain.OtpUsecase
+	otpService     domain.OtpUseCase
 	otpDomain      domain.Otp
 	userDomain     domain.User
 )
 
 func TestMain(m *testing.M) {
-	otpService = usecase.NewOTPUsecase(&otpRepository, &userRepository, &mailerConfig)
+	otpService = usecase.NewOTPUseCase(&otpRepository, &userRepository, &mailerConfig)
 
 	otpDomain = domain.Otp{
 		Key:   "test@gmail.com",

@@ -6,22 +6,22 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	mocks "github.com/gusrylmubarok/training-system/ts-backend/src/domain/mocks/repository"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
+	"github.com/superosystem/trainingsystem-backend/src/common/helper"
 	"github.com/superosystem/trainingsystem-backend/src/domain"
-	"github.com/superosystem/trainingsystem-backend/src/helper"
+	mocks "github.com/superosystem/trainingsystem-backend/src/domain/mocks/repository"
 	"github.com/superosystem/trainingsystem-backend/src/usecase"
 )
 
 var (
 	categoryRepository mocks.CategoryRepository
-	categoryService    domain.CategoryUsecase
+	categoryService    domain.CategoryUseCase
 	categoryDomain     domain.Category
 )
 
 func TestMain(m *testing.M) {
-	categoryService = usecase.NewCategoryUsecase(&categoryRepository)
+	categoryService = usecase.NewCategoryUseCase(&categoryRepository)
 
 	categoryDomain = domain.Category{
 		ID:        uuid.NewString(),

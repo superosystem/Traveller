@@ -5,19 +5,19 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
+	"github.com/superosystem/trainingsystem-backend/src/common/helper"
 	"github.com/superosystem/trainingsystem-backend/src/controllers/courses/request"
 	"github.com/superosystem/trainingsystem-backend/src/controllers/courses/response"
 	"github.com/superosystem/trainingsystem-backend/src/domain"
-	"github.com/superosystem/trainingsystem-backend/src/helper"
 )
 
 type CourseController struct {
-	courseUsecase domain.CourseUsecase
+	courseUseCase domain.CourseUseCase
 }
 
-func NewCourseController(courseUsecase domain.CourseUsecase) *CourseController {
+func NewCourseController(courseUseCase domain.CourseUseCase) *CourseController {
 	return &CourseController{
-		courseUsecase: courseUsecase,
+		courseUseCase: courseUseCase,
 	}
 }
 
@@ -34,7 +34,7 @@ func (ctrl *CourseController) HandlerCreateCourse(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, helper.BadRequestResponse(err.Error()))
 	}
 
-	err := ctrl.courseUsecase.Create(courseInput.ToDomain())
+	err := ctrl.courseUseCase.Create(courseInput.ToDomain())
 
 	if err != nil {
 		if errors.Is(err, helper.ErrMentorNotFound) {
@@ -54,7 +54,7 @@ func (ctrl *CourseController) HandlerCreateCourse(c echo.Context) error {
 func (ctrl *CourseController) HandlerFindAllCourses(c echo.Context) error {
 	title := c.QueryParam("keyword")
 
-	coursesDomain, err := ctrl.courseUsecase.FindAll(title)
+	coursesDomain, err := ctrl.courseUseCase.FindAll(title)
 
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, helper.InternalServerErrorResponse(helper.ErrInternalServerError.Error()))
@@ -72,7 +72,7 @@ func (ctrl *CourseController) HandlerFindAllCourses(c echo.Context) error {
 func (ctrl *CourseController) HandlerFindByIdCourse(c echo.Context) error {
 	courseId := c.Param("courseId")
 
-	courseDomain, err := ctrl.courseUsecase.FindById(courseId)
+	courseDomain, err := ctrl.courseUseCase.FindById(courseId)
 
 	if err != nil {
 		if errors.Is(err, helper.ErrCourseNotFound) {
@@ -89,7 +89,7 @@ func (ctrl *CourseController) HandlerFindByIdCourse(c echo.Context) error {
 func (ctrl *CourseController) HandlerFindByCategory(c echo.Context) error {
 	categoryId := c.Param("categoryId")
 
-	coursesDomain, err := ctrl.courseUsecase.FindByCategory(categoryId)
+	coursesDomain, err := ctrl.courseUseCase.FindByCategory(categoryId)
 
 	if err != nil {
 		if errors.Is(err, helper.ErrCategoryNotFound) {
@@ -113,7 +113,7 @@ func (ctrl *CourseController) HandlerFindByCategory(c echo.Context) error {
 func (ctrl *CourseController) HandlerFindByMentor(c echo.Context) error {
 	mentorId := c.Param("mentorId")
 
-	coursesDomain, err := ctrl.courseUsecase.FindByMentor(mentorId)
+	coursesDomain, err := ctrl.courseUseCase.FindByMentor(mentorId)
 
 	if err != nil {
 		if errors.Is(err, helper.ErrCategoryNotFound) {
@@ -135,7 +135,7 @@ func (ctrl *CourseController) HandlerFindByMentor(c echo.Context) error {
 }
 
 func (ctrl *CourseController) HandlerFindByPopular(c echo.Context) error {
-	coursesDomain, err := ctrl.courseUsecase.FindByPopular()
+	coursesDomain, err := ctrl.courseUseCase.FindByPopular()
 
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, helper.InternalServerErrorResponse(helper.ErrInternalServerError.Error()))
@@ -174,7 +174,7 @@ func (ctrl *CourseController) HandlerUpdateCourse(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, helper.BadRequestResponse(err.Error()))
 	}
 
-	err := ctrl.courseUsecase.Update(courseId, courseInput.ToDomain())
+	err := ctrl.courseUseCase.Update(courseId, courseInput.ToDomain())
 
 	if err != nil {
 		if errors.Is(err, helper.ErrCategoryNotFound) {
@@ -194,7 +194,7 @@ func (ctrl *CourseController) HandlerUpdateCourse(c echo.Context) error {
 func (ctrl *CourseController) HandlerSoftDeleteCourse(c echo.Context) error {
 	courseId := c.Param("courseId")
 
-	err := ctrl.courseUsecase.Delete(courseId)
+	err := ctrl.courseUseCase.Delete(courseId)
 
 	if err != nil {
 		if errors.Is(err, helper.ErrCourseNotFound) {

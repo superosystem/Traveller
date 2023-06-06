@@ -5,7 +5,7 @@ type Certificate struct {
 	CourseId string
 }
 
-// PDFService represents the interface of a pdf generation service
-type CertificateUsecase interface {
+// CertificateUseCase Generate Certificate to PDF
+type CertificateUseCase interface {
 	GenerateCert(data *Certificate) ([]byte, error)
 }

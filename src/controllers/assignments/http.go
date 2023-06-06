@@ -5,19 +5,19 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
+	"github.com/superosystem/trainingsystem-backend/src/common/helper"
 	"github.com/superosystem/trainingsystem-backend/src/controllers/assignments/request"
 	"github.com/superosystem/trainingsystem-backend/src/controllers/assignments/response"
 	"github.com/superosystem/trainingsystem-backend/src/domain"
-	"github.com/superosystem/trainingsystem-backend/src/helper"
 )
 
 type AssignmentController struct {
-	assignmentUsecase domain.AssignmentUsecase
+	assignmentUseCase domain.AssignmentUseCase
 }
 
-func NewAssignmentsController(assignmentUsecase domain.AssignmentUsecase) *AssignmentController {
+func NewAssignmentsController(assignmentUseCase domain.AssignmentUseCase) *AssignmentController {
 	return &AssignmentController{
-		assignmentUsecase: assignmentUsecase,
+		assignmentUseCase: assignmentUseCase,
 	}
 }
 
@@ -32,7 +32,7 @@ func (ctrl *AssignmentController) HandlerCreateAssignment(c echo.Context) error 
 		return c.JSON(http.StatusBadRequest, helper.BadRequestResponse(err.Error()))
 	}
 
-	err := ctrl.assignmentUsecase.Create(assignmentInput.ToDomain())
+	err := ctrl.assignmentUseCase.Create(assignmentInput.ToDomain())
 
 	if err != nil {
 		if errors.Is(err, helper.ErrAssignmentNotFound) {
@@ -48,7 +48,7 @@ func (ctrl *AssignmentController) HandlerCreateAssignment(c echo.Context) error 
 func (ctrl *AssignmentController) HandlerFindByIdAssignment(c echo.Context) error {
 	assignmentId := c.Param("assignmentId")
 
-	assignment, err := ctrl.assignmentUsecase.FindById(assignmentId)
+	assignment, err := ctrl.assignmentUseCase.FindById(assignmentId)
 
 	if err != nil {
 		if errors.Is(err, helper.ErrAssignmentNotFound) {
@@ -64,7 +64,7 @@ func (ctrl *AssignmentController) HandlerFindByIdAssignment(c echo.Context) erro
 func (ctrl *AssignmentController) HandlerFindByCourse(c echo.Context) error {
 	courseid := c.Param("courseid")
 
-	assignmentCourse, err := ctrl.assignmentUsecase.FindByCourseId(courseid)
+	assignmentCourse, err := ctrl.assignmentUseCase.FindByCourseId(courseid)
 
 	if err != nil {
 		if errors.Is(err, helper.ErrCourseNotFound) {
@@ -89,7 +89,7 @@ func (ctrl *AssignmentController) HandlerUpdateAssignment(c echo.Context) error 
 		return c.JSON(http.StatusBadRequest, helper.BadRequestResponse(err.Error()))
 	}
 
-	err := ctrl.assignmentUsecase.Update(assignmentId, assignmentInput.ToDomain())
+	err := ctrl.assignmentUseCase.Update(assignmentId, assignmentInput.ToDomain())
 
 	if err != nil {
 		if errors.Is(err, helper.ErrCourseNotFound) {
@@ -107,7 +107,7 @@ func (ctrl *AssignmentController) HandlerUpdateAssignment(c echo.Context) error 
 func (ctrl *AssignmentController) HandlerDeleteAssignment(c echo.Context) error {
 	assignmentId := c.Param("assignmentId")
 
-	err := ctrl.assignmentUsecase.Delete(assignmentId)
+	err := ctrl.assignmentUseCase.Delete(assignmentId)
 
 	if err != nil {
 		if errors.Is(err, helper.ErrAssignmentNotFound) {

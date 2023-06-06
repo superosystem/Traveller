@@ -5,17 +5,19 @@ import (
 	"github.com/superosystem/trainingsystem-backend/src/domain"
 )
 
-type categoryUsecase struct {
+type categoryUseCase struct {
 	categoryRepository domain.CategoryRepository
 }
 
-func NewCategoryUsecase(categoryRepository domain.CategoryRepository) domain.CategoryUsecase {
-	return categoryUsecase{
+func NewCategoryUseCase(
+	categoryRepository domain.CategoryRepository,
+) domain.CategoryUseCase {
+	return categoryUseCase{
 		categoryRepository: categoryRepository,
 	}
 }
 
-func (c categoryUsecase) Create(categoryDomain *domain.Category) error {
+func (c categoryUseCase) Create(categoryDomain *domain.Category) error {
 	id := uuid.NewString()
 
 	category := domain.Category{
@@ -24,7 +26,6 @@ func (c categoryUsecase) Create(categoryDomain *domain.Category) error {
 	}
 
 	err := c.categoryRepository.Create(&category)
-
 	if err != nil {
 		return err
 	}
@@ -32,9 +33,8 @@ func (c categoryUsecase) Create(categoryDomain *domain.Category) error {
 	return nil
 }
 
-func (c categoryUsecase) FindAll() (*[]domain.Category, error) {
+func (c categoryUseCase) FindAll() (*[]domain.Category, error) {
 	categories, err := c.categoryRepository.FindAll()
-
 	if err != nil {
 		return nil, err
 	}
@@ -42,9 +42,8 @@ func (c categoryUsecase) FindAll() (*[]domain.Category, error) {
 	return categories, nil
 }
 
-func (c categoryUsecase) FindById(id string) (*domain.Category, error) {
+func (c categoryUseCase) FindById(id string) (*domain.Category, error) {
 	category, err := c.categoryRepository.FindById(id)
-
 	if err != nil {
 		return nil, err
 	}
@@ -52,21 +51,15 @@ func (c categoryUsecase) FindById(id string) (*domain.Category, error) {
 	return category, nil
 }
 
-func (c categoryUsecase) Update(id string, categoryDomain *domain.Category) error {
+func (c categoryUseCase) Update(id string, categoryDomain *domain.Category) error {
 	if _, err := c.categoryRepository.FindById(id); err != nil {
 		return err
 	}
 
 	err := c.categoryRepository.Update(id, categoryDomain)
-
 	if err != nil {
 		return err
 	}
 
 	return nil
 }
-
-// func (c categoryUsecase) Delete(id string) error {
-// 	//TODO implement me
-// 	panic("implement me")
-// }

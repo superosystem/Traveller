@@ -5,19 +5,19 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
+	"github.com/superosystem/trainingsystem-backend/src/common/helper"
 	"github.com/superosystem/trainingsystem-backend/src/controllers/reviews/request"
 	"github.com/superosystem/trainingsystem-backend/src/controllers/reviews/response"
 	"github.com/superosystem/trainingsystem-backend/src/domain"
-	"github.com/superosystem/trainingsystem-backend/src/helper"
 )
 
 type ReviewController struct {
-	reviewUsecase domain.ReviewUsecase
+	reviewUseCase domain.ReviewUseCase
 }
 
-func NewReviewController(reviewUscase domain.ReviewUsecase) *ReviewController {
+func NewReviewController(reviewUscase domain.ReviewUseCase) *ReviewController {
 	return &ReviewController{
-		reviewUsecase: reviewUscase,
+		reviewUseCase: reviewUscase,
 	}
 }
 
@@ -32,7 +32,7 @@ func (ctrl *ReviewController) HandlerCreateReview(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, helper.BadRequestResponse(err.Error()))
 	}
 
-	err := ctrl.reviewUsecase.Create(reviewInput.ToDomain())
+	err := ctrl.reviewUseCase.Create(reviewInput.ToDomain())
 
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, helper.InternalServerErrorResponse(helper.ErrInternalServerError.Error()))
@@ -45,7 +45,7 @@ func (ctrl *ReviewController) HandlerFindByMentee(c echo.Context) error {
 	keyword := c.QueryParam("keyword")
 	menteeId := c.Param("menteeId")
 
-	reviews, err := ctrl.reviewUsecase.FindByMentee(menteeId, keyword)
+	reviews, err := ctrl.reviewUseCase.FindByMentee(menteeId, keyword)
 
 	if err != nil {
 		if errors.Is(err, helper.ErrMenteeNotFound) {
@@ -67,7 +67,7 @@ func (ctrl *ReviewController) HandlerFindByMentee(c echo.Context) error {
 func (ctrl *ReviewController) HandlerFindByCourse(c echo.Context) error {
 	courseId := c.Param("courseId")
 
-	reviews, err := ctrl.reviewUsecase.FindByCourse(courseId)
+	reviews, err := ctrl.reviewUseCase.FindByCourse(courseId)
 
 	if err != nil {
 		if errors.Is(err, helper.ErrCourseNotFound) {

@@ -8,16 +8,16 @@ import (
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
-	"github.com/superosystem/trainingsystem-backend/src/config"
+	"github.com/superosystem/trainingsystem-backend/src/common/config"
+	"github.com/superosystem/trainingsystem-backend/src/common/helper"
 	"github.com/superosystem/trainingsystem-backend/src/domain"
 	mocks "github.com/superosystem/trainingsystem-backend/src/domain/mocks/repository"
-	"github.com/superosystem/trainingsystem-backend/src/helper"
 	"github.com/superosystem/trainingsystem-backend/src/usecase"
 )
 
 var (
 	materialRepository mocks.MaterialRepository
-	materialService    domain.MaterialUsecase
+	materialService    domain.MaterialUseCase
 	moduleRepository   mocks.ModuleRepository
 	storageClient      config.StorageConfig
 	moduleDomain       domain.Module
@@ -27,7 +27,7 @@ var (
 )
 
 func TestMain(m *testing.M) {
-	materialService = usecase.NewMaterialUsecase(&materialRepository, &moduleRepository, &storageClient)
+	materialService = usecase.NewMaterialUseCase(&materialRepository, &moduleRepository, &storageClient)
 
 	moduleDomain = domain.Module{
 		ID:        uuid.NewString(),

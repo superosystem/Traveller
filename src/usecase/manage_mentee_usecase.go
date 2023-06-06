@@ -2,25 +2,24 @@ package usecase
 
 import (
 	"context"
-
-	"github.com/superosystem/trainingsystem-backend/src/config"
+	"github.com/superosystem/trainingsystem-backend/src/common/config"
 	"github.com/superosystem/trainingsystem-backend/src/domain"
 )
 
-type manageMenteeUsecase struct {
+type manageMenteeUseCase struct {
 	menteeCourse     domain.MenteeCourseRepository
 	menteeProgress   domain.MenteeProgressRepository
 	menteeAssignment domain.MenteeAssignmentRepository
 	storage          *config.StorageConfig
 }
 
-func NewManageMenteeUsecase(
+func NewManageMenteeUseCase(
 	menteeCourse domain.MenteeCourseRepository,
 	menteeProgress domain.MenteeProgressRepository,
 	menteeAssignment domain.MenteeAssignmentRepository,
 	storage *config.StorageConfig,
-) domain.ManageMenteeUsecase {
-	return manageMenteeUsecase{
+) domain.ManageMenteeUseCase {
+	return manageMenteeUseCase{
 		menteeCourse:     menteeCourse,
 		menteeProgress:   menteeProgress,
 		menteeAssignment: menteeAssignment,
@@ -28,7 +27,7 @@ func NewManageMenteeUsecase(
 	}
 }
 
-func (mm manageMenteeUsecase) DeleteAccess(menteeId string, courseId string) error {
+func (mm manageMenteeUseCase) DeleteAccess(menteeId string, courseId string) error {
 	if _, err := mm.menteeCourse.CheckEnrollment(menteeId, courseId); err != nil {
 		return err
 	}

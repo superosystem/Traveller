@@ -7,9 +7,9 @@ import (
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
+	"github.com/superosystem/trainingsystem-backend/src/common/helper"
 	"github.com/superosystem/trainingsystem-backend/src/domain"
 	mocks "github.com/superosystem/trainingsystem-backend/src/domain/mocks/repository"
-	"github.com/superosystem/trainingsystem-backend/src/helper"
 	"github.com/superosystem/trainingsystem-backend/src/usecase"
 )
 
@@ -18,7 +18,7 @@ var (
 	menteeCourseRepository mocks.MenteeCourseRepository
 	menteeRepository       mocks.MenteeRepository
 	courseRepository       mocks.CourseRepository
-	reviewService          domain.ReviewUsecase
+	reviewService          domain.ReviewUseCase
 	reviewDomain           domain.Review
 	menteeCourseDomain     domain.MenteeCourse
 	courseDomain           domain.Course
@@ -26,7 +26,7 @@ var (
 )
 
 func TestMain(m *testing.M) {
-	reviewService = usecase.NewReviewUsecase(&reviewRepository, &menteeCourseRepository, &menteeRepository, &courseRepository)
+	reviewService = usecase.NewReviewUseCase(&reviewRepository, &menteeCourseRepository, &menteeRepository, &courseRepository)
 
 	menteeDomain = domain.Mentee{
 		ID:             uuid.NewString(),
