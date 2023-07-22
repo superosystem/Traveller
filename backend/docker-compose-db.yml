@@ -1,0 +1,51 @@
+version: '2.20'
+
+services:
+  mysql:
+    container_name: training-system-mysql
+    image: mysql:8.0
+    restart: on-failure
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_NAME}
+      MYSQL_USER: ${MYSQL_USERNAME}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - '3306:3306'
+    volumes:
+      - mysql:/var/lib/mysql
+    healthcheck:
+      test: ['CMD', 'mysql', '-u', 'root', '-proot', '-e', 'SHOW SCHEMAS']
+      interval: 5s
+      retries: 3
+    networks:
+      - training-system-net
+
+  redis:
+    container_name: 'training-system-redis'
+    image: redis:6
+    restart: on-failure
+    command: redis-server /usr/local/etc/redis/redis.conf
+    ports:
+      - '6379:6379'
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+      # - redis:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 5s
+      retries: 3
+    networks:
+      - training-system-net
+  
+  redis-client:
+    container_name: redis-client
+    image: redis:6
+
+volumes:
+  mysql:
+  redis:
+
+networks:
+  training-system-net:
+    driver: bridge
