@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  db:
+    container_name: traveller-postgres
+    image: postgres:15.3
+    restart: always
+    env_file: ./.env
+    environment:
+      POSTGRES_DB: ${PGDATABASE}
+      POSTGRES_USER: ${PGUSER}
+      POSTGRES_PASSWORD: ${PGPASSWORD}
+    ports:
+      - '5432:5432'
+    expose:
+      - 5432
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '100m'
+        max-file: '5'
