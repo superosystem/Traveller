@@ -1,4 +1,4 @@
-package org.superosystem.traveller.ui.home
+package org.superosystem.traveller.ui.main
 
 import android.content.Context
 import android.graphics.Rect

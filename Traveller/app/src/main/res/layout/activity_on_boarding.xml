@@ -64,13 +64,13 @@
         android:layout_marginTop="@dimen/_16sdp"
         android:fontFamily="@font/nunito_extra_bold"
         android:gravity="center_horizontal"
+        android:text="@string/title_menu_2"
         android:textColor="@color/customColorSecondary90"
         android:textSize="@dimen/_14ssp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/logoMenu2"
         app:layout_constraintStart_toStartOf="@+id/logoMenu2"
-        app:layout_constraintTop_toBottomOf="@+id/logoMenu2"
-        android:text="@string/title_menu_2" />
+        app:layout_constraintTop_toBottomOf="@+id/logoMenu2" />
 
     <TextView
         android:id="@+id/descMenu2"
@@ -103,13 +103,13 @@
         android:layout_marginTop="@dimen/_16sdp"
         android:fontFamily="@font/nunito_extra_bold"
         android:gravity="center_horizontal"
+        android:text="@string/title_menu_3"
         android:textColor="@color/customColorSecondary90"
         android:textSize="@dimen/_14ssp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/logoMenu3"
         app:layout_constraintStart_toStartOf="@+id/logoMenu3"
-        app:layout_constraintTop_toBottomOf="@+id/logoMenu3"
-        android:text="@string/title_menu_3" />
+        app:layout_constraintTop_toBottomOf="@+id/logoMenu3" />
 
     <TextView
         android:id="@+id/descMenu3"
@@ -118,12 +118,12 @@
         android:layout_marginTop="@dimen/_8sdp"
         android:fontFamily="@font/nunito_regular"
         android:gravity="center_horizontal"
+        android:text="@string/desc_menu_3"
         android:textColor="@color/black"
         android:textSize="@dimen/_10ssp"
         app:layout_constraintEnd_toEndOf="@+id/titleMenu3"
         app:layout_constraintStart_toStartOf="@+id/titleMenu3"
-        app:layout_constraintTop_toBottomOf="@+id/titleMenu3"
-        android:text="@string/desc_menu_3" />
+        app:layout_constraintTop_toBottomOf="@+id/titleMenu3" />
 
     <ImageView
         android:id="@+id/logoMenu4"
@@ -142,13 +142,13 @@
         android:layout_marginTop="@dimen/_16sdp"
         android:fontFamily="@font/nunito_extra_bold"
         android:gravity="center_horizontal"
+        android:text="@string/title_menu_4"
         android:textColor="@color/customColorSecondary90"
         android:textSize="@dimen/_16ssp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/logoMenu4"
         app:layout_constraintStart_toStartOf="@+id/logoMenu4"
-        app:layout_constraintTop_toBottomOf="@+id/logoMenu4"
-        android:text="@string/title_menu_4" />
+        app:layout_constraintTop_toBottomOf="@+id/logoMenu4" />
 
     <androidx.constraintlayout.utils.widget.ImageFilterView
         android:id="@+id/menu1"

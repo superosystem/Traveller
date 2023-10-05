@@ -1,0 +1,183 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="10dp"
+    android:background="@color/white"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="3dp"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="10dp">
+
+        <TextView
+            android:id="@+id/timeDepart_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_bold"
+            android:textColor="@color/customColorFont"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/search_time_departure_default" />
+
+        <TextView
+            android:id="@+id/cityDepartCode_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/bg_card_search"
+            android:fontFamily="@font/nunito_semi_bold"
+            android:paddingHorizontal="7dp"
+            android:paddingVertical="2dp"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/timeDepart_tv"
+            tools:text="@string/search_code_departure_default" />
+
+        <ImageView
+            android:id="@+id/flightRoute_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:contentDescription="@string/search_route_icon"
+            android:src="@drawable/ic_route"
+            app:layout_constraintStart_toEndOf="@id/timeDepart_tv"
+            app:layout_constraintTop_toBottomOf="@id/timeDepart_tv" />
+
+        <TextView
+            android:id="@+id/flightDuration_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_semi_bold"
+            android:gravity="center"
+            android:textColor="#7F8385"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@id/flightRoute_iv"
+            app:layout_constraintEnd_toEndOf="@id/flightRoute_iv"
+            app:layout_constraintStart_toStartOf="@id/flightRoute_iv"
+            tools:text="@string/search_total_time" />
+
+        <TextView
+            android:id="@+id/flightType_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_semi_bold"
+            android:gravity="center"
+            android:textColor="#7F8385"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@id/flightRoute_iv"
+            app:layout_constraintStart_toStartOf="@id/flightRoute_iv"
+            app:layout_constraintTop_toBottomOf="@id/flightRoute_iv"
+            tools:text="@string/search_direct" />
+
+        <TextView
+            android:id="@+id/timeArrive_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/nunito_bold"
+            android:textColor="@color/customColorFont"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@id/flightRoute_iv"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/search_time_destination_default" />
+
+        <TextView
+            android:id="@+id/cityArriveCode_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/bg_card_search"
+            android:fontFamily="@font/nunito_semi_bold"
+            android:paddingHorizontal="7dp"
+            android:paddingVertical="2dp"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/flightRoute_iv"
+            app:layout_constraintTop_toBottomOf="@id/timeArrive_tv"
+            tools:text="@string/search_code_destination_default" />
+
+        <TextView
+            android:id="@+id/price_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_bold"
+            android:textColor="@color/customColorNeutral50"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@id/pax_tv"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/search_price_default" />
+
+        <TextView
+            android:id="@+id/pax_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_semi_bold"
+            android:text="@string/search_pax"
+            android:textColor="#7F8385"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/airplaneImage_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:contentDescription="@string/search_plane_logo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cityDepartCode_tv"
+            tools:src="@drawable/search_plane_logo" />
+
+        <TextView
+            android:id="@+id/airplaneName_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/nunito_bold"
+            android:textColor="@color/customColorFont"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/airplaneImage_iv"
+            app:layout_constraintTop_toBottomOf="@+id/cityDepartCode_tv"
+            tools:text="@string/search_plane_default" />
+
+        <ImageView
+            android:id="@+id/luggage_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_card_search"
+            android:contentDescription="@string/search_luggage"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="2dp"
+            android:src="@drawable/search_luggage"
+            android:textColor="#7F8385"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/airplaneName_tv" />
+
+        <org.superosystem.traveller.ui.component.CustomButton
+            android:id="@+id/buyBtn"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="50dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="@string/search_btn_buy"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/price_tv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

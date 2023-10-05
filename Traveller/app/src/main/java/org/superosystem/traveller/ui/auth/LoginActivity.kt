@@ -16,17 +16,17 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import org.superosystem.traveller.ui.home.HomeActivity
 import org.superosystem.traveller.R
 import org.superosystem.traveller.data.preference.SavedPreference
 import org.superosystem.traveller.data.repository.AuthRepository
 import org.superosystem.traveller.databinding.ActivityLoginBinding
 import org.superosystem.traveller.ui.eula.EulaActivity
+import org.superosystem.traveller.ui.main.HomeActivity
 import org.superosystem.traveller.ui.onboard.OnBoardingActivity
 import org.superosystem.traveller.utils.Constants
 import org.superosystem.traveller.utils.Resources
 import org.superosystem.traveller.viewmodel.AuthViewModel
-import org.superosystem.traveller.viewmodel.AuthViewModelFactory
+import org.superosystem.traveller.viewmodel.factory.AuthViewModelFactory
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
 

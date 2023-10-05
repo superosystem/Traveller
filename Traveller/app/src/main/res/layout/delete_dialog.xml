@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/dialog_image"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:src="@drawable/ic_delete_dialog"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/delete" />
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nunito_bold"
+        android:text="@string/delete_it_dialog"
+        android:textColor="@color/customColorFont"
+        android:gravity="center_horizontal"
+        android:textSize="16sp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintStart_toStartOf="@id/dialog_image"
+        app:layout_constraintEnd_toEndOf="@id/dialog_image"
+        app:layout_constraintTop_toBottomOf="@id/dialog_image"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

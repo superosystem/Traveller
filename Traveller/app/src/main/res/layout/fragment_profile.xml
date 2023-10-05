@@ -1,14 +1,178 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.fragment.ProfileFragment">
+    android:background="@color/customColorBackground"
+    tools:context=".ui.main.fragment.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_header_profile"
+                android:contentDescription="@string/profile_header"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_50sdp"
+                android:fontFamily="@font/nunito_extra_bold"
+                android:paddingStart="@dimen/_15sdp"
+                android:paddingEnd="@dimen/_15sdp"
+                android:text="@string/profile_title"
+                android:textColor="@color/customColorPrimary50"
+                android:textSize="@dimen/_28ssp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_card_profile"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_440sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_14sdp"
+                android:background="@drawable/bg_card"
+                android:contentDescription="@string/profile_card"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_profile" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_profile_picture"
+                android:layout_width="@dimen/_180sdp"
+                android:layout_height="@dimen/_215sdp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/_30sdp"
+                app:civ_border_color="@color/customColorSecondary10"
+                app:civ_border_width="@dimen/_3sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/iv_card_profile"
+                tools:src="@drawable/avatar" />
+
+            <TextView
+                android:id="@+id/tv_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_50sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_50sdp"
+                android:fontFamily="@font/nunito_bold"
+                android:textAlignment="center"
+                android:textColor="@color/customColorFont"
+                android:textSize="@dimen/_18ssp"
+                app:layout_constraintEnd_toEndOf="@id/iv_card_profile"
+                app:layout_constraintStart_toStartOf="@id/iv_card_profile"
+                app:layout_constraintTop_toBottomOf="@id/iv_profile_picture"
+                tools:text="@string/profile_name" />
+
+            <TextView
+                android:id="@+id/tv_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_50sdp"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_marginEnd="@dimen/_50sdp"
+                android:fontFamily="@font/nunito_semi_bold"
+                android:textAlignment="center"
+                android:textColor="@color/customColorFont"
+                android:textSize="@dimen/_16ssp"
+                app:layout_constraintEnd_toEndOf="@id/iv_card_profile"
+                app:layout_constraintStart_toStartOf="@id/iv_card_profile"
+                app:layout_constraintTop_toBottomOf="@id/tv_username"
+                tools:text="@string/profile_email" />
+
+            <Button
+                android:id="@+id/btn_edit_profile"
+                android:layout_width="@dimen/_230sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:background="@drawable/bg_button_edit_profile"
+                android:fontFamily="@font/nunito_semi_bold"
+                android:text="@string/profile_btn_edit_profile"
+                android:textAllCaps="false"
+                android:textColor="@color/customColorPrimary50"
+                android:textSize="@dimen/_16ssp"
+                app:layout_constraintEnd_toEndOf="@id/iv_card_profile"
+                app:layout_constraintStart_toStartOf="@id/iv_card_profile"
+                app:layout_constraintTop_toBottomOf="@id/tv_email" />
+
+            <org.superosystem.traveller.ui.component.CustomButton
+                android:id="@+id/btn_logout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginStart="@dimen/_18sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginEnd="@dimen/_18sdp"
+                android:background="@drawable/bg_button_logout"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/profile_btn_logout"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_card_profile" />
+
+            <TextView
+                android:id="@+id/tv_about_traveloka"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_120sdp"
+                android:fontFamily="@font/nunito_extra_bold"
+                android:paddingStart="@dimen/_20sdp"
+                android:paddingEnd="@dimen/_20sdp"
+                android:text="@string/profile_about"
+                android:textColor="@color/customColorFont"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_logout" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="@dimen/_208sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/customColorNeutral50"
+                android:indeterminateTintMode="src_atop"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_about_traveloka"
+                app:layout_constraintVertical_bias="0.3" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

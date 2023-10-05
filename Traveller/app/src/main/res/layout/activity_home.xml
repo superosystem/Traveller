@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.HomeActivity">
+    tools:context=".ui.main.HomeActivity">
 
     <FrameLayout
         android:id="@+id/flFragment"
@@ -28,15 +28,15 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
-        app:itemTextAppearanceActive="@style/BottomNavigationViewTextStyle"
-        app:itemTextAppearanceInactive="@style/BottomNavigationViewTextStyle"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_65sdp"
         android:paddingBottom="@dimen/_8sdp"
-        app:menu="@menu/bottom_nav"
+        app:itemTextAppearanceActive="@style/BottomNavigationViewTextStyle"
+        app:itemTextAppearanceInactive="@style/BottomNavigationViewTextStyle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
