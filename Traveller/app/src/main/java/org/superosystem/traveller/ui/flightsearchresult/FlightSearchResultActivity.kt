@@ -17,6 +17,8 @@ import org.superosystem.traveller.data.repository.AuthRepository
 import org.superosystem.traveller.data.repository.FlightRepository
 import org.superosystem.traveller.databinding.ActivityFlightSearchResultBinding
 import org.superosystem.traveller.ui.adapter.SearchListAdapter
+import org.superosystem.traveller.ui.ocr.ManualInputActivity
+import org.superosystem.traveller.ui.ocr.OCRScreenActivity
 import org.superosystem.traveller.utils.Constants
 import org.superosystem.traveller.utils.Resources
 import org.superosystem.traveller.viewmodel.AuthViewModel

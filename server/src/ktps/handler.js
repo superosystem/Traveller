@@ -127,7 +127,8 @@ const addImageKtp = async (request, h) => {
 				values: [idUser],
 			};
 			await pool.query(queryDeleteResult);
-			// console.log("Udah dihapus data ktp result-nya");
+			// eslint-disable-next-line no-console
+			console.log('Udah dihapus data ktp result-nya');
 		}
 		// --------------------------------------------------
 

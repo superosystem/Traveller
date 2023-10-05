@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/iv_success_page_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.ocr.SuccessPageActivity">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_success_page"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="130dp"
+        android:contentDescription="@string/success_image"
+        android:src="@drawable/success_page"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_success_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nunito_bold"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:text="@string/success_title"
+        android:textAlignment="center"
+        android:textColor="@color/customColorFont"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_success_page" />
+
+    <org.superosystem.traveller.ui.component.CustomButton
+        android:id="@+id/cv_btn_success_toFlight"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="40dp"
+        android:backgroundTint="@color/customColorSecondary50"
+        android:fontFamily="@font/nunito_bold"
+        android:text="@string/success_btn"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_success_title" />
+
+    <org.superosystem.traveller.ui.component.CustomButton
+        android:id="@+id/cv_btn_success_toHistory"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="40dp"
+        android:fontFamily="@font/nunito_bold"
+        android:text="@string/success_btn1"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cv_btn_success_toFlight" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

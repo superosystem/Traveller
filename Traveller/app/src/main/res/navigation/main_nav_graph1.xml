@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph1"
+    app:startDestination="@id/historyFragment">
+
+    <fragment
+        android:id="@+id/flightFragment"
+        android:name="org.superosystem.traveller.ui.main.fragment.FlightFragment"
+        android:label="fragment_flight"
+        tools:layout="@layout/fragment_flight" />
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="org.superosystem.traveller.ui.main.fragment.HistoryFragment"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history" >
+        <action
+            android:id="@+id/action_historyFragment_to_historyDetailActivity"
+            app:destination="@id/historyDetailActivity" />
+        <action
+            android:id="@+id/action_historyFragment_self"
+            app:destination="@id/historyFragment" />
+    </fragment>
+
+    <activity
+        android:id="@+id/historyDetailActivity"
+        android:name="org.superosystem.traveller.ui.main.historydetail.HistoryDetailActivity"
+        android:label="activity_history_detail"
+        tools:layout="@layout/activity_history_detail" >
+        <argument
+            android:name="bookingid"
+            app:argType="string" />
+    </activity>
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="org.superosystem.traveller.ui.main.fragment.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="org.superosystem.traveller.ui.main.fragment.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" >
+        <action
+            android:id="@+id/action_editProfileFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+
+</navigation>

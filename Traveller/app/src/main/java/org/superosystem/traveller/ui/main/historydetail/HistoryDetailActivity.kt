@@ -23,7 +23,7 @@ import org.superosystem.traveller.viewmodel.FlightViewModel
 import org.superosystem.traveller.viewmodel.factory.AuthViewModelFactory
 import org.superosystem.traveller.viewmodel.factory.FlightViewModelFactory
 import java.text.NumberFormat
-import java.util.*
+import java.util.Locale
 
 class HistoryDetailActivity : AppCompatActivity() {
 

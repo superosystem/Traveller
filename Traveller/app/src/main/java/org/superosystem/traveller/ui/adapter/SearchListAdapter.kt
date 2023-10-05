@@ -14,7 +14,7 @@ import org.superosystem.traveller.data.preference.SavedPreference
 import org.superosystem.traveller.databinding.ItemRowFlightBinding
 import org.superosystem.traveller.utils.Constants
 import java.text.NumberFormat
-import java.util.*
+import java.util.Locale
 
 
 class SearchListAdapter(
