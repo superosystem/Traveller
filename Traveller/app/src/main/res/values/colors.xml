@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <!--CUSTOM COLOR-->
+    <color name="customColorPrimary90">#E8E7E7</color>
+    <color name="customColorPrimary50">#F4F3F3</color>
+    <color name="customColorPrimary10">#FAFAFA</color>
+
+    <color name="customColorSecondary90">#1A5984</color>
+    <color name="customColorSecondary50">#2C95DC</color>
+    <color name="customColorSecondary10">#80BFEA</color>
+
+    <color name="customColorNeutral90">#8E3C1E</color>
+    <color name="customColorNeutral50">#EC6432</color>
+    <color name="customColorNeutral10">#F6B299</color>
+
+    <color name="customColorFont">#263238</color>
+    <color name="customColorHint">#93999C</color>
+
+    <color name="customColorBackground">#E8E7E7</color>
+
+    <color name="bg_btn_logout">#EA4335</color>
+
+    <color name="notFoundBackgroundCamera">#DD222222</color>
+
+    <color name="success">#DD62C200</color>
+    <color name="pending">#DDC9770B</color>
+    <color name="failed">#DDEC0A0A</color>
+</resources>

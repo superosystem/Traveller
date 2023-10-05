@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.splashscreen.SplashScreenActivity">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_moon"
+        android:layout_width="@dimen/_135sdp"
+        android:layout_height="@dimen/_150sdp"
+        android:contentDescription="@string/splash_moon_icon"
+        android:src="@drawable/splash_moon_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_plane"
+        android:layout_width="@dimen/_102sdp"
+        android:layout_height="@dimen/_145sdp"
+        android:layout_marginEnd="@dimen/_85sdp"
+        android:contentDescription="@string/splash_plane_icon"
+        android:src="@drawable/splash_plane_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_cloud"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_300sdp"
+        android:contentDescription="@string/splash_cloud_icon"
+        android:src="@drawable/splash_cloud_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_person_splash_screen"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="@dimen/_320sdp"
+        android:contentDescription="@string/splash_person"
+        android:scaleType="centerInside"
+        android:src="@drawable/splash_person_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_welcome_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_110sdp"
+        android:fontFamily="@font/nunito_bold"
+        android:text="@string/splash_welcome_to"
+        android:textColor="@color/customColorFont"
+        android:textSize="@dimen/_18ssp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:fontFamily="@font/lilita_one_regular"
+        android:text="@string/app_name"
+        android:textColor="@color/customColorSecondary90"
+        android:textSize="@dimen/_30ssp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_welcome_to" />
+
+    <TextView
+        android:id="@+id/tv_logo_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:fontFamily="@font/nunito_bold"
+        android:text="@string/splash_logo_desc"
+        android:textColor="@color/customColorFont"
+        android:textSize="@dimen/_10ssp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_logo" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="tv_logo,tv_welcome_to,tv_logo_desc" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

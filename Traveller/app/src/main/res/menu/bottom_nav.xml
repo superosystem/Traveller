@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/flightFragment"
+        android:title="@string/fragment_flight"
+        android:icon="@drawable/ic_flight"/>
+
+    <item android:id="@+id/historyFragment"
+        android:title="@string/fragment_history"
+        android:icon="@drawable/ic_history"/>
+
+    <item android:id="@+id/profileFragment"
+        android:title="@string/fragment_profile"
+        android:icon="@drawable/ic_profile"/>
+</menu>

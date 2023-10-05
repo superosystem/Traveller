@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.auth.RegistrationActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_register"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_230sdp"
+            android:contentDescription="@string/person_icon"
+            android:scaleType="fitXY"
+            android:src="@drawable/regis_person_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/nunito_bold"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingEnd="@dimen/_15sdp"
+            android:text="@string/regis_title"
+            android:textColor="@color/customColorFont"
+            android:textSize="@dimen/_24ssp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_register" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_name"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            app:endIconMode="clear_text"
+            app:helperText=""
+            app:helperTextTextColor="@android:color/holo_red_light"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_register">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etv_name"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                android:background="@drawable/bg_edit_text"
+                android:fontFamily="@font/nunito_semi_bold"
+                android:gravity="start|center"
+                android:hint="@string/regis_enter_name"
+                android:inputType="textPersonName"
+                android:paddingStart="@dimen/_15sdp"
+                android:paddingEnd="@dimen/_15sdp"
+                android:textColorHint="@color/customColorHint"
+                android:textSize="@dimen/_12ssp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_email"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            app:endIconMode="clear_text"
+            app:helperText=""
+            app:helperTextTextColor="@android:color/holo_red_light"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/til_name">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etv_email"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                android:background="@drawable/bg_edit_text"
+                android:fontFamily="@font/nunito_semi_bold"
+                android:gravity="start|center"
+                android:hint="@string/enter_email"
+                android:inputType="textEmailAddress"
+                android:paddingStart="@dimen/_15sdp"
+                android:paddingEnd="@dimen/_15sdp"
+                android:textColorHint="@color/customColorHint"
+                android:textSize="@dimen/_12ssp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_password"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            app:endIconMode="password_toggle"
+            app:helperText=""
+            app:helperTextTextColor="@android:color/holo_red_light"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/til_email">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etv_password"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                android:background="@drawable/bg_edit_text"
+                android:fontFamily="@font/nunito_semi_bold"
+                android:gravity="start|center"
+                android:hint="@string/enter_password"
+                android:inputType="textPassword"
+                android:paddingStart="@dimen/_15sdp"
+                android:paddingEnd="@dimen/_15sdp"
+                android:textColorHint="@color/customColorHint"
+                android:textSize="@dimen/_12ssp"
+                tools:ignore="RtlSymmetry" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <org.superosystem.traveller.ui.component.CustomButton
+            android:id="@+id/btn_signup"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:enabled="false"
+            android:fontFamily="@font/nunito_bold"
+            android:text="@string/regis_title"
+            android:textSize="@dimen/_18ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/til_password" />
+
+        <LinearLayout
+            android:id="@+id/ll_sign_up_hyperlink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_signup">
+
+            <TextView
+                android:id="@+id/tv_already_have_an_account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/regis_options"
+                android:textColor="@color/customColorFont"
+                android:textSize="@dimen/_10ssp" />
+
+            <TextView
+                android:id="@+id/login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:fontFamily="@font/nunito_extra_bold"
+                android:text="@string/regis_redirect_login"
+                android:textColor="@color/customColorFont"
+                android:textSize="@dimen/_10ssp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_eula_hyperlink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_30sdp"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/_20sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/progressBar">
+
+            <TextView
+                android:id="@+id/tv_by_agreeing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/eula_register_agreement"
+                android:textColor="@color/customColorHint"
+                android:textSize="@dimen/_8ssp" />
+
+            <TextView
+                android:id="@+id/eula_hyperlink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:fontFamily="@font/nunito_extra_bold"
+                android:text="@string/eula_agreement"
+                android:textColor="@color/customColorHint"
+                android:textSize="@dimen/_8ssp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="@dimen/_208sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/customColorNeutral50"
+            android:indeterminateTintMode="src_atop"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ll_sign_up_hyperlink"
+            app:layout_constraintVertical_bias="0.3" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

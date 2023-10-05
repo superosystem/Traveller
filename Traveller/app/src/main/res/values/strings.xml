@@ -1,0 +1,890 @@
+<resources>
+    <string name="app_name">Traveller</string>
+    <string name="person_icon">Person Icon</string>
+    <string name="enter_email">Please enter your email</string>
+    <string name="enter_password">Please enter your password</string>
+    <string name="error_password_message">Your password must have at least 6 characters long</string>
+    <string name="error_empty_message">This field can not be empty</string>
+    <string name="error_invalid_email_message">Invalid Email Address</string>
+    <!--SPLASH SCREEN ACTIVITY-->
+    <string name="splash_moon_icon">Moon Icon</string>
+    <string name="splash_welcome_to">Welcome to…</string>
+    <string name="splash_logo_desc">Scan your travel identity in a flash time</string>
+    <string name="splash_plane_icon">Plane Icon</string>
+    <string name="splash_cloud_icon">Cloud Icon</string>
+    <string name="splash_person">Person-Splash</string>
+
+    <!--SIGN UP ACTIVITY-->
+    <string name="regis_title">Sign Up</string>
+    <string name="regis_enter_name">Please enter your name</string>
+    <string name="regis_options">Already have an account?</string>
+    <string name="regis_redirect_login"><u>Login</u></string>
+
+    <!--LOGIN TEXT-->
+    <string name="login_clouds_icon">Clouds Icon</string>
+    <string name="login_title">Login</string>
+    <string name="login_options">or login with</string>
+    <string name="login_google">Google</string>
+    <string name="login_redirect">Don\'t have an account?</string>
+    <string name="login_redirect_signup"><u>SignUp</u></string>
+
+    <!--SUCCESS PAGE ACTIVITY-->
+    <string name="success_image">Success</string>
+    <string name="success_desc">Please make a payment according to the booked ticket and please check your email for E-Ticket information.</string>
+    <string name="success_btn">Book another Flight</string>
+    <string name="success_btn1">Go to History Page</string>
+    <string name="success_title">Transaction Completed</string>
+
+    <!--OCR SCREEN ACTIVITY-->
+    <string name="scan_ktp_title">Scan ID Card (KTP)</string>
+    <string name="scan_ktp_desc">Adjust your ID Card (KTP) according to the box above to start scanning</string>
+    <string name="back">Back</string>
+    <string name="error_image">Error Image</string>
+    <string name="error_text_ocr">An error occurred while scanning, please do a rescan</string>
+    <string name="ok">OK</string>
+
+    <!--OCR RESULT ACTIVITY-->
+    <string name="scan_result">Scan Result</string>
+    <string name="scan_result_desc">Please check the data listed down below.</string>
+    <string name="title">Title</string>
+    <string name="name">Name</string>
+    <string name="nationality">Nationality</string>
+    <string name="id_card_number_nik">ID Card Number (NIK)</string>
+    <string name="gender">Gender</string>
+    <string name="marital_status">Marital Status</string>
+    <string name="ocr_warning_desc">Is the data above correct?</string>
+    <string name="warning_desc2">If not, please <u>correct the form data</u> above or press <u>the retry button</u> next to re-scan the ID card.</string>
+    <string name="contact_title">Contact Information for E-Ticket delivery</string>
+    <string name="dummy_person">Gojou Satoru</string>
+    <string name="dummy_email">greentea99@gmail.com</string>
+    <string name="edit_email">Edit</string>
+    <string name="submit">Submit</string>
+
+    <!--PROFILE ACTIVITY-->
+    <string name="bg_header_profile">background header profile</string>
+    <string name="profile">Profile</string>
+    <string name="content_profile">content profile</string>
+    <string name="logout">Logout</string>
+    <string name="about_Traveller"><u>About Traveller</u></string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="card_profile">Card Profile</string>
+    <string name="turn_camera">Switch Camera</string>
+    <string name="flashlight">Flashlight</string>
+    <string name="ic_back">icon back</string>
+    <string name="upload_image">Upload Image</string>
+    <string name="save_changes">Save Changes</string>
+
+    <!-- HomeActivity -->
+    <string name="Flight_HomeActivity">Flight</string>
+    <string name="flight">Flights</string>
+    <string name="history">History</string>
+    <string name="account">Account</string>
+    <string name="textview_dummy">TextView</string>
+    <string name="mr_dummy">Mr.</string>
+    <string name="wni_dummy">WNI</string>
+    <string name="nik_dummy">1234567890123456</string>
+    <string name="man_dummy">Man</string>
+    <string name="single_dummy">Single</string>
+    <string name="retry_button">Retry Button</string>
+    <string name="email_user">user54@gmail.com</string>
+    <string name="username_user">Username</string>
+
+    <!-- Flight Screen Activity -->
+    <string name="city_departure">Select City Departure</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="city_destination">Select City Destination</string>
+    <string name="date">Date</string>
+    <string name="select_date">Select Date</string>
+    <string name="passengers">Passengers</string>
+    <string name="passenger_default">1 passenger</string>
+    <string name="seat_class">Seat Class</string>
+    <string name="seat_class_default">Economy</string>
+    <string name="search_btn">Search</string>
+
+    <!-- Flight Search Activity -->
+    <string name="city_default">Balikpapan</string>
+    <string name="destination_icon">destination icon</string>
+    <string name="time_departure_default">16:55</string>
+    <string name="code_city_departure_default">BPN</string>
+    <string name="direct">Direct</string>
+    <string name="time_destination_default">18:00</string>
+    <string name="time_total">2h 5m</string>
+    <string name="code_city_destination_default">CGK</string>
+    <string name="ticket_price_default">Rp 877.500</string>
+    <string name="pax">/pax</string>
+    <string name="plane_logo">plane logo</string>
+    <string name="plane_name_default">Lion Air</string>
+    <string name="luggage">luggage</string>
+    <string name="buy_btn">Buy</string>
+    <string name="SearchListAdapter_flightDuration">%1sh %2sm</string>
+    <string name="SearchListAdapter_direct">Direct</string>
+    <string name="FlightSearchResultActivity_paxTv"> · %1s pax · </string>
+
+    <!-- Flight History Activity -->
+    <string name="booking_id">Booking ID</string>
+    <string name="booking_id_value">721123654</string>
+    <string name="date_default">April 2022</string>
+    <string name="departure_default">Jakarta</string>
+    <string name="route_icon">→</string>
+    <string name="destination_default">Batam</string>
+    <string name="verified">verified</string>
+    <string name="travel_insurance_flight">Travel Insurance (Flight)</string>
+    <string name="HistoryAdapter_PurchaseStatus">Purchase %1s</string>
+
+    <!-- Flight History Detail Activity -->
+    <string name="flight_eticket">Flight E-ticket</string>
+    <string name="airline_booking_code">Airline Booking Code</string>
+    <string name="booking_code">C22KY01</string>
+    <string name="depart_time">14:40</string>
+    <string name="arrival_time">15:40</string>
+    <string name="passenger">Passenger</string>
+    <string name="jakarta">Jakarta</string>
+    <string name="detail_user_info">User haven\'t filled out the form</string>
+    <string name="info">This airline doesn’t allow passenger name correction</string>
+
+    <!--ERROR TEXT-->
+    <string name="error_400">400 Error</string>
+    <string name="error">Something went wrong</string>
+    <string name="error_401">Error 401</string>
+    <string name="button_back">button back image</string>
+
+    <!--FLIGHT SEARCH TEXT-->
+    <string name="search_back">Back Icon</string>
+    <string name="search_city_default">Jakarta</string>
+    <string name="search_destination_icon">Arrow Icon</string>
+    <string name="search_city_destination_default">Bali</string>
+    <string name="search_date_default">Wed, 11 May</string>
+    <string name="search_default_pack">· 1 pax ·</string>
+    <string name="search_class_default">Economy</string>
+    <string name="search_time_departure_default">12.53</string>
+    <string name="search_code_departure_default">HLP</string>
+    <string name="search_route_icon">Route Icon</string>
+    <string name="search_total_time">2h 5m</string>
+    <string name="search_direct">Direct</string>
+    <string name="search_time_destination_default">14.58</string>
+    <string name="search_code_destination_default">DPN</string>
+    <string name="search_price_default">Rp. 877.500</string>
+    <string name="search_pax">/pax</string>
+    <string name="search_plane_logo">Plane Logo</string>
+    <string name="search_plane_default">Lion Air</string>
+    <string name="search_luggage">Luggage</string>
+    <string name="search_btn_buy">Buy</string>
+
+    <!-- Data Dummy -->
+    <string-array name="data_city">
+        <item>Malang</item>
+        <item>Ransiki</item>
+        <item>Semarang</item>
+        <item>Yogyakarta</item>
+        <item>Solo</item>
+        <item>Padang Sidempuan</item>
+        <item>Pulau Alor</item>
+        <item>Amahai</item>
+        <item>Masamba</item>
+        <item>Anggi</item>
+        <item>Apalapsili</item>
+        <item>Arso</item>
+        <item>Ayawasi</item>
+        <item>Babo</item>
+        <item>Bade</item>
+        <item>Batom</item>
+        <item>Batulicin</item>
+        <item>Tanjung Redeb</item>
+        <item>Bau Bau</item>
+        <item>Gunungsitoli</item>
+        <item>Bokondini</item>
+        <item>Bolaang Mogondow</item>
+        <item>Bontang</item>
+        <item>Luwuk</item>
+        <item>Tanjung Pandan</item>
+        <item>Pulau Bunyu</item>
+        <item>Tasikmalaya</item>
+        <item>Cirebon</item>
+        <item>Meulaboh</item>
+        <item>Singkep</item>
+        <item>Dobo</item>
+        <item>Langgur</item>
+        <item>Kupang</item>
+        <item>Enarotali</item>
+        <item>Biak</item>
+        <item>Galela</item>
+        <item>Larantuka</item>
+        <item>Astraksetra</item>
+        <item>Jakarta</item>
+        <item>Atambua</item>
+        <item>Batam</item>
+        <item>Sampit</item>
+        <item>Makassar</item>
+        <item>Bandung</item>
+        <item>Ilaga</item>
+        <item>Inanwatan</item>
+        <item>Ende</item>
+        <item>Pangkalan Bun</item>
+        <item>Jakarta</item>
+        <item>Rengat</item>
+        <item>Sorong</item>
+        <item>Numfor</item>
+        <item>Surabaya</item>
+        <item>Long Bawan</item>
+        <item>Tarakan</item>
+        <item>Kaimana</item>
+        <item>Poso</item>
+        <item>Kebar</item>
+        <item>Keluang</item>
+        <item>Kepi</item>
+        <item>Tanjung Pinang</item>
+        <item>Labuhan Bajo</item>
+        <item>Toli Toli</item>
+        <item>Lereh</item>
+        <item>Lhok Sukon (Lhoksukon)</item>
+        <item>Long Apung</item>
+        <item>Sabang</item>
+        <item>Mangole</item>
+        <item>Melangguane</item>
+        <item>Merdei</item>
+        <item>Ketaping / Padang</item>
+        <item>Mindiptana</item>
+        <item>Moanamani</item>
+        <item>Merauke</item>
+        <item>Bima</item>
+        <item>Bengkulu</item>
+        <item>Mulia</item>
+        <item>Palu</item>
+        <item>Nabire</item>
+        <item>Naha</item>
+        <item>Namlea</item>
+        <item>Melawi</item>
+        <item>Benjina</item>
+        <item>Cepu</item>
+        <item>Bali</item>
+        <item>Nunukan</item>
+        <item>Okaba</item>
+        <item>Oksibil</item>
+        <item>Jambi</item>
+        <item>Bengkulu</item>
+        <item>Bajawa</item>
+        <item>Pangkal Pinang</item>
+        <item>Putusibau</item>
+        <item>Ambon</item>
+        <item>Pendopo</item>
+        <item>Dumai</item>
+        <item>Morotai</item>
+        <item>Medan</item>
+        <item>Jakarta</item>
+        <item>Primapun</item>
+        <item>Bandar Lampung</item>
+        <item>Ketapang</item>
+        <item>Natuna</item>
+        <item>Manokwari</item>
+        <item>Sipora</item>
+        <item>Manado</item>
+        <item>Sanana</item>
+        <item>Sangir</item>
+        <item>Tanjung Santan</item>
+        <item>Ruteng</item>
+        <item>Saumlaki</item>
+        <item>Mataram</item>
+        <item>Senggeh</item>
+        <item>Jayapura</item>
+        <item>Balikpapan</item>
+        <item>Kotabaru</item>
+        <item>Lubuk Linggau</item>
+        <item>Siborong-borong</item>
+        <item>Cengkareng</item>
+        <item>Soroako</item>
+        <item>Ternate</item>
+        <item>Banda Aceh</item>
+        <item>Palembang</item>
+        <item>Pekanbaru</item>
+        <item>Sumbawa</item>
+        <item>Tanjung Balai</item>
+        <item>Pontianak</item>
+        <item>Sintang</item>
+        <item>Banjarmasin</item>
+        <item>Taliabu</item>
+        <item>Waikabubak</item>
+        <item>Mamuju</item>
+        <item>Tanah Grogot</item>
+        <item>Tanah Merah</item>
+        <item>Teminabuan</item>
+        <item>Samarinda</item>
+        <item>Tapak Tuan</item>
+        <item>Tembagapura</item>
+        <item>Palangkaraya</item>
+        <item>Fak Fak</item>
+        <item>Sumenep</item>
+        <item>Cilacap</item>
+        <item>Wagethe</item>
+        <item>Maumere</item>
+        <item>Waingapu</item>
+        <item>Wamena</item>
+        <item>Waris</item>
+        <item>Tanjung Selor</item>
+        <item>Wasior</item>
+        <item>Kendari</item>
+    </string-array>
+
+    <string-array name="code_city">
+        <item>MLG</item>
+        <item>RSK</item>
+        <item>SRG</item>
+        <item>JOG</item>
+        <item>SOC</item>
+        <item>AEG</item>
+        <item>ARD</item>
+        <item>AHI</item>
+        <item>MXB</item>
+        <item>AGD</item>
+        <item>AAS</item>
+        <item>ARJ</item>
+        <item>AYW</item>
+        <item>BXB</item>
+        <item>BXD</item>
+        <item>BXM</item>
+        <item>BTW</item>
+        <item>BEJ</item>
+        <item>BUW</item>
+        <item>GNS</item>
+        <item>BUI</item>
+        <item>BJG</item>
+        <item>BXT</item>
+        <item>LUW</item>
+        <item>TJQ</item>
+        <item>BYQ</item>
+        <item>TSY</item>
+        <item>CBN</item>
+        <item>MEQ</item>
+        <item>SIQ</item>
+        <item>DOB</item>
+        <item>LUV</item>
+        <item>KOE</item>
+        <item>EWI</item>
+        <item>BIK</item>
+        <item>GLX</item>
+        <item>LKA</item>
+        <item>AKQ</item>
+        <item>HLP</item>
+        <item>ABU</item>
+        <item>BTH</item>
+        <item>SMQ</item>
+        <item>UPG</item>
+        <item>BDO</item>
+        <item>ILA</item>
+        <item>INX</item>
+        <item>ENE</item>
+        <item>PKN</item>
+        <item>JKT</item>
+        <item>RGT</item>
+        <item>SOQ</item>
+        <item>FOO</item>
+        <item>SUB</item>
+        <item>LBW</item>
+        <item>TRK</item>
+        <item>KNG</item>
+        <item>PSJ</item>
+        <item>KEQ</item>
+        <item>KLQ</item>
+        <item>KEI</item>
+        <item>TNJ</item>
+        <item>LBJ</item>
+        <item>TLI</item>
+        <item>LHI</item>
+        <item>LSX</item>
+        <item>LPU</item>
+        <item>SBG</item>
+        <item>MAL</item>
+        <item>MNA</item>
+        <item>RDE</item>
+        <item>PDG</item>
+        <item>MDP</item>
+        <item>ONI</item>
+        <item>MKQ</item>
+        <item>BMU</item>
+        <item>MPC</item>
+        <item>LII</item>
+        <item>PLW</item>
+        <item>NBX</item>
+        <item>NAH</item>
+        <item>NAM</item>
+        <item>NPO</item>
+        <item>BJK</item>
+        <item>CPF</item>
+        <item>DPS</item>
+        <item>NNX</item>
+        <item>OKQ</item>
+        <item>OKL</item>
+        <item>DJB</item>
+        <item>BKS</item>
+        <item>BJW</item>
+        <item>PGK</item>
+        <item>PSU</item>
+        <item>AMQ</item>
+        <item>PDO</item>
+        <item>DUM</item>
+        <item>OTI</item>
+        <item>MES</item>
+        <item>PCB</item>
+        <item>TKG</item>
+        <item>KTG</item>
+        <item>NTX</item>
+        <item>MKW</item>
+        <item>RKO</item>
+        <item>MDC</item>
+        <item>SQN</item>
+        <item>SAE</item>
+        <item>TSX</item>
+        <item>RTG</item>
+        <item>SXK</item>
+        <item>AMI</item>
+        <item>SEH</item>
+        <item>DJJ</item>
+        <item>BPN</item>
+        <item>KBU</item>
+        <item>LLG</item>
+        <item>SQT</item>
+        <item>CGK</item>
+        <item>SQR</item>
+        <item>TTE</item>
+        <item>BTJ</item>
+        <item>PLM</item>
+        <item>PKU</item>
+        <item>SWQ</item>
+        <item>TJB</item>
+        <item>PNK</item>
+        <item>SQG</item>
+        <item>BDJ</item>
+        <item>TAX</item>
+        <item>TMC</item>
+        <item>MJU</item>
+        <item>TNB</item>
+        <item>TMH</item>
+        <item>TXM</item>
+        <item>SRI</item>
+        <item>TPK</item>
+        <item>TIM</item>
+        <item>PKY</item>
+        <item>FKQ</item>
+        <item>SUP</item>
+        <item>CXP</item>
+        <item>WET</item>
+        <item>MOF</item>
+        <item>WGP</item>
+        <item>WMX</item>
+        <item>WAR</item>
+        <item>TJS</item>
+        <item>WSR</item>
+        <item>KDI</item>
+    </string-array>
+
+    <string-array name="data_dummy_city">
+        <item>Malang-MLG</item>
+        <item>Ransiki-RSK</item>
+        <item>Semarang-SRG</item>
+        <item>Yogyakarta-JOG</item>
+        <item>Solo-SOC</item>
+        <item>Padang Sidempuan-AEG</item>
+        <item>Pulau Alor-ARD</item>
+        <item>Amahai-AHI</item>
+        <item>Masamba-MXB</item>
+        <item>Anggi-AGD</item>
+        <item>Apalapsili-AAS</item>
+        <item>Arso-ARJ</item>
+        <item>Ayawasi-AYW</item>
+        <item>Babo-BXB</item>
+        <item>Bade-BXD</item>
+        <item>Batom-BXM</item>
+        <item>Batulicin-BTW</item>
+        <item>Tanjung Redeb-BEJ</item>
+        <item>Bau Bau-BUW</item>
+        <item>Gunungsitoli-GNS</item>
+        <item>Bokondini-BUI</item>
+        <item>Bolaang Mogondow-BJG</item>
+        <item>Bontang-BXT</item>
+        <item>Luwuk-LUW</item>
+        <item>Tanjung Pandan-TJQ</item>
+        <item>Pulau Bunyu-BYQ</item>
+        <item>Tasikmalaya-TSY</item>
+        <item>Cirebon-CBN</item>
+        <item>Meulaboh-MEQ</item>
+        <item>Singkep-SIQ</item>
+        <item>Dobo-DOB</item>
+        <item>Langgur-LUV</item>
+        <item>Kupang-KOE</item>
+        <item>Enarotali-EWI</item>
+        <item>Biak-BIK</item>
+        <item>Galela-GLX</item>
+        <item>Larantuka-LKA</item>
+        <item>Astraksetra-AKQ</item>
+        <item>Jakarta-HLP</item>
+        <item>Atambua-ABU</item>
+        <item>Batam-BTH</item>
+        <item>Sampit-SMQ</item>
+        <item>Makassar-UPG</item>
+        <item>Bandung-BDO</item>
+        <item>Ilaga-ILA</item>
+        <item>Inanwatan-INX</item>
+        <item>Ende-ENE</item>
+        <item>Pangkalan Bun-PKN</item>
+        <item>Jakarta-JKT</item>
+        <item>Rengat-RGT</item>
+        <item>Sorong-SOQ</item>
+        <item>Numfor-FOO</item>
+        <item>Surabaya-SUB</item>
+        <item>Long Bawan-LBW</item>
+        <item>Tarakan-TRK</item>
+        <item>Kaimana-KNG</item>
+        <item>Poso-PSJ</item>
+        <item>Kebar-KEQ</item>
+        <item>Keluang-KLQ</item>
+        <item>Kepi-KEI</item>
+        <item>Tanjung Pinang-TNJ</item>
+        <item>Labuhan Bajo-LBJ</item>
+        <item>Toli Toli-TLI</item>
+        <item>Lereh-LHI</item>
+        <item>Lhok Sukon (Lhoksukon)-LSX</item>
+        <item>Long Apung-LPU</item>
+        <item>Sabang-SBG</item>
+        <item>Mangole-MAL</item>
+        <item>Melangguane-MNA</item>
+        <item>Merdei-RDE</item>
+        <item>Ketaping / Padang-PDG</item>
+        <item>Mindiptana-MDP</item>
+        <item>Moanamani-ONI</item>
+        <item>Merauke-MKQ</item>
+        <item>Bima-BMU</item>
+        <item>Bengkulu-MPC</item>
+        <item>Mulia-LII</item>
+        <item>Palu-PLW</item>
+        <item>Nabire-NBX</item>
+        <item>Naha-NAH</item>
+        <item>Namlea-NAM</item>
+        <item>Melawi-NPO</item>
+        <item>Benjina-BJK</item>
+        <item>Cepu-CPF</item>
+        <item>Bali-DPS</item>
+        <item>Nunukan-NNX</item>
+        <item>Okaba-OKQ</item>
+        <item>Oksibil-OKL</item>
+        <item>Jambi-DJB</item>
+        <item>Bengkulu-BKS</item>
+        <item>Bajawa-BJW</item>
+        <item>Pangkal Pinang-PGK</item>
+        <item>Putusibau-PSU</item>
+        <item>Ambon-AMQ</item>
+        <item>Pendopo-PDO</item>
+        <item>Dumai-DUM</item>
+        <item>Morotai-OTI</item>
+        <item>Medan-MES</item>
+        <item>Jakarta-PCB</item>
+        <item>Bandar Lampung-TKG</item>
+        <item>Ketapang-KTG</item>
+        <item>Natuna-NTX</item>
+        <item>Manokwari-MKW</item>
+        <item>Sipora-RKO</item>
+        <item>Manado-MDC</item>
+        <item>Sanana-SQN</item>
+        <item>Sangir-SAE</item>
+        <item>Tanjung Santan-TSX</item>
+        <item>Ruteng-RTG</item>
+        <item>Saumlaki-SXK</item>
+        <item>Mataram-AMI</item>
+        <item>Senggeh-SEH</item>
+        <item>Jayapura-DJJ</item>
+        <item>Balikpapan-BPN</item>
+        <item>Kotabaru-KBU</item>
+        <item>Lubuk Linggau-LLG</item>
+        <item>Siborong-borong-SQT</item>
+        <item>Cengkareng-CGK</item>
+        <item>Soroako-SQR</item>
+        <item>Ternate-TTE</item>
+        <item>Banda Aceh-BTJ</item>
+        <item>Palembang-PLM</item>
+        <item>Pekanbaru-PKU</item>
+        <item>Sumbawa-SWQ</item>
+        <item>Tanjung Balai-TJB</item>
+        <item>Pontianak-PNK</item>
+        <item>Sintang-SQG</item>
+        <item>Banjarmasin-BDJ</item>
+        <item>Taliabu-TAX</item>
+        <item>Waikabubak-TMC</item>
+        <item>Mamuju-MJU</item>
+        <item>Tanah Grogot-TNB</item>
+        <item>Tanah Merah-TMH</item>
+        <item>Teminabuan-TXM</item>
+        <item>Samarinda-SRI</item>
+        <item>Tapak Tuan-TPK</item>
+        <item>Tembagapura-TIM</item>
+        <item>Palangkaraya-PKY</item>
+        <item>Fak Fak-FKQ</item>
+        <item>Sumenep-SUP</item>
+        <item>Cilacap-CXP</item>
+        <item>Wagethe-WET</item>
+        <item>Maumere-MOF</item>
+        <item>Waingapu-WGP</item>
+        <item>Wamena-WMX</item>
+        <item>Waris-WAR</item>
+        <item>Tanjung Selor-TJS</item>
+        <item>Wasior-WSR</item>
+        <item>Kendari-KDI</item>
+    </string-array>
+
+    <string-array name="data_dummy_passengers">
+        <item>1 passenger</item>
+        <item>2 passengers</item>
+        <item>3 passengers</item>
+        <item>4 passengers</item>
+        <item>5 passengers</item>
+        <item>6 passengers</item>
+        <item>7 passengers</item>
+    </string-array>
+
+    <string-array name="data_number_passengers">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+    </string-array>
+
+    <string-array name="data_dummy_seatClass">
+        <item>Economy</item>
+        <item>Premium Economy</item>
+        <item>Business</item>
+        <item>First Class</item>
+    </string-array>
+
+    <string-array name="data_dummy_timeDepart">
+        <item>16:55</item>
+        <item>08:55</item>
+        <item>10:55</item>
+        <item>07:00</item>
+        <item>08:00</item>
+    </string-array>
+
+    <string-array name="data_dummy_cityDepartCode">
+        <item>BPN</item>
+        <item>BPN</item>
+        <item>BPN</item>
+        <item>BPN</item>
+        <item>BPN</item>
+    </string-array>
+
+    <string-array name="data_dummy_flightDuration">
+        <item>2h 5m</item>
+        <item>2h 5m</item>
+        <item>2h 5m</item>
+        <item>2h 10m</item>
+        <item>2h 5m</item>
+    </string-array>
+
+    <string-array name="data_dummy_flightType">
+        <item>Direct</item>
+        <item>Direct</item>
+        <item>Direct</item>
+        <item>Direct</item>
+        <item>Direct</item>
+    </string-array>
+
+    <string-array name="data_dummy_timeArrive">
+        <item>18:00</item>
+        <item>10:00</item>
+        <item>12:00</item>
+        <item>08:10</item>
+        <item>09:05</item>
+    </string-array>
+
+    <string-array name="data_dummy_cityArriveCode">
+        <item>CGK</item>
+        <item>CGK</item>
+        <item>CGK</item>
+        <item>CGK</item>
+        <item>CGK</item>
+    </string-array>
+
+    <string-array name="data_dummy_price">
+        <item>Rp 877.500</item>
+        <item>Rp 890.400</item>
+        <item>Rp 890.400</item>
+        <item>Rp 954.100</item>
+        <item>Rp 890.400</item>
+    </string-array>
+
+    <string-array name="data_dummy_airplaneImage">
+        <item>@drawable/lion_air</item>
+        <item>@drawable/lion_air</item>
+        <item>@drawable/lion_air</item>
+        <item>@drawable/super_air_jet</item>
+        <item>@drawable/lion_air</item>
+    </string-array>
+
+    <string-array name="data_dummy_airplaneName">
+        <item>Lion Air</item>
+        <item>Lion Air</item>
+        <item>Lion Air</item>
+        <item>Super Air Jet</item>
+        <item>Lion Air</item>
+    </string-array>
+
+    <string-array name="data_dummy_monthHistoryTicket">
+        <item>April 2022</item>
+        <item>April 2022</item>
+        <item>March 2022</item>
+        <item>March 2022</item>
+        <item>March 2022</item>
+    </string-array>
+
+    <string-array name="data_dummy_bookingIDHistoryTicket">
+        <item>721123654</item>
+        <item>448123654</item>
+        <item>123456654</item>
+        <item>953812456</item>
+        <item>231983132</item>
+    </string-array>
+
+    <string-array name="data_dummy_priceHistoryTicket">
+        <item>Rp 623.700</item>
+        <item>Rp 977.000</item>
+        <item>Rp 683.200</item>
+        <item>Rp 877.500</item>
+        <item>Rp 931.800</item>
+    </string-array>
+
+    <string-array name="data_dummy_departCityHistoryTicket">
+        <item>Jakarta</item>
+        <item>Denpasar</item>
+        <item>Batam</item>
+        <item>Balikpapan</item>
+        <item>Makassar</item>
+    </string-array>
+
+    <string-array name="data_dummy_arriveCityHistoryTicket">
+        <item>Batam</item>
+        <item>Jakarta</item>
+        <item>Jakarta</item>
+        <item>Jakarta</item>
+        <item>Jakarta</item>
+    </string-array>
+
+    <string-array name="data_dummy_purchaseStatusHistoryTicket">
+        <item>Purchase Pending</item>
+        <item>Purchase Successful</item>
+        <item>Purchase Successful</item>
+        <item>Purchase Successful</item>
+        <item>Purchase Successful</item>
+    </string-array>
+
+    <!--OCR SCREEN RESULT-->
+    <!--TITLE DATA-->
+    <string-array name="data_title">
+        <item>Mr.</item>
+        <item>Ms.</item>
+        <item>Mrs.</item>
+    </string-array>
+
+    <!--NATIONALITY DATA-->
+    <string-array name="data_nationality">
+        <item>WNI</item>
+        <item>WNA</item>
+    </string-array>
+
+    <!--GENDER DATA-->
+    <string-array name="data_gender">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <!--MARITAL STATUS DATA-->
+    <string-array name="data_marital_status">
+        <item>Single</item>
+        <item>Married</item>
+    </string-array>
+
+    <!--MANUAL INPUT PAGE-->
+    <string name="manual_input">User Identity Form</string>
+    <string name="manual_input_desc">Please enter your data below</string>
+
+    <!--HOMEPAGE TEXT-->
+    <string name="fragment_flight">Flight</string>
+    <string name="fragment_history">History</string>
+    <string name="fragment_profile">Profile</string>
+
+    <!--FLIGHT TEXT-->
+    <string name="flight_title">Flight</string>
+    <string name="flight_from">From</string>
+    <string name="flight_city_departure">City Departure</string>
+    <string name="flight_to">To</string>
+    <string name="flight_city_destination">City Destination</string>
+    <string name="flight_date">Date</string>
+    <string name="flight_select_date">Select Date</string>
+    <string name="flight_passengers">Passengers</string>
+    <string name="flight_passenger_default">1 Passenger</string>
+    <string name="flight_seat_class">Seat Class</string>
+    <string name="flight_seat_class_default">Economy</string>
+    <string name="flight_btn_search">Search</string>
+    <string name="retry_image">retry image</string>
+    <string name="retry_text_ocr">Our system unable to recognize your Identity Card, are you sure want to scan it?</string>
+    <string name="please_retry">Please Retry</string>
+    <string name="textview">text</string>
+    <string name="history_title">History</string>
+
+    <!--PROFILE TEXT-->
+    <string name="profile_header">Profile Header</string>
+    <string name="profile_title">Profile</string>
+    <string name="profile_card">Card Profile</string>
+    <string name="profile_name">Name</string>
+    <string name="profile_email">xxx@gmail.com</string>
+    <string name="profile_btn_edit_profile">Edit Profile</string>
+    <string name="profile_btn_logout">Logout</string>
+    <string name="profile_about"><u>About Traveller OCR</u></string>
+    <string name="history_empty">Your travel journey is still empty</string>
+
+    <!--ON BOARDING TEXT-->
+    <string name="title_menu_1">Why are we here?</string>
+    <string name="desc_menu_1">TravellerOCR’s main goal is to tackle the problem where you need to type your personal information for administrative purposes manually that can be inconvenient and prone to error.</string>
+    <string name="title_menu_2">Easy, Accurate, Realtime</string>
+    <string name="desc_menu_2">TravellerOCR wants to make it easier for you by only capturing your ID Cards with accurate and realtime output.</string>
+    <string name="title_menu_3">Secured Data</string>
+    <string name="desc_menu_3">We ensure your privacy and data are secured.</string>
+    <string name="register_now">Register Now</string>
+    <string name="logo_menu_1">logo menu 1</string>
+    <string name="title_menu_4">Ready to Start?</string>
+
+    <!--EULA PAGE-->
+    <string name="eula_title">End-User License Agreement (EULA) of TravellerOCR</string>
+    <string name="eula_p1">This End-User License Agreement (\"EULA\") is a legal agreement between you and Traveller Singapore. Our EULA was created by EULA Template for TravellerOCR.</string>
+    <string name="eula_p2">This EULA agreement governs your acquisition and use of our TravellerOCR software (\"Software\") directly from Traveller Singapore or indirectly through a Traveller Singapore authorized reseller or distributor (a \"Reseller\").</string>
+    <string name="eula_p3">Please read this EULA agreement carefully before completing the installation process and using the TravellerOCR software. It provides a license to use the TravellerOCR software and contains warranty information and liability disclaimers.</string>
+    <string name="eula_p4">If you register for a free trial of the TravellerOCR software, this EULA agreement will also govern that trial. By clicking \"accept\" or installing and/or using the TravellerOCR software, you are confirming your acceptance of the Software and agreeing to become bound by the terms of this EULA agreement.</string>
+    <string name="eula_p5">If you are entering into this EULA agreement on behalf of a company or other legal entity, you represent that you have the authority to bind such entity and its affiliates to these terms and conditions. If you do not have such authority or if you do not agree with the terms and conditions of this EULA agreement, do not install or use the Software, and you must not accept this EULA agreement.</string>
+    <string name="eula_p6">This EULA agreement shall apply only to the Software supplied by Traveller Singapore herewith regardless of whether other software is referred to or described herein. The terms also apply to any Traveller Singapore updates, supplements, Internet-based services, and support services for the Software, unless other terms accompany those items on delivery. If so, those terms apply.</string>
+    <string name="eula_subtitle1">License Grant</string>
+    <string name="eula_p7">Traveller Singapore hereby grants you a personal, non-transferable, non-exclusive licence to use the TravellerOCR software on your devices in accordance with the terms of this EULA agreement.</string>
+    <string name="eula_p8">You are permitted to load the TravellerOCR software (for example a PC, laptop, mobile or tablet) under your control. You are responsible for ensuring your device meets the minimum requirements of the TravellerOCR software.</string>
+    <string name="eula_subtitle2">You are not permitted to:</string>
+    <string name="eula_p9">Edit, alter, modify, adapt, translate or otherwise change the whole or any part of the Software nor permit the whole or any part of the Software to be combined with or become incorporated in any other software, nor decompile, disassemble or reverse engineer the Software or attempt to do any such things \n\n\tReproduce, copy, distribute, resell or otherwise use the Software for any commercial purpose \n\n\tAllow any third party to use the Software on behalf of or for the benefit of any third party \n\n\tUse the Software in any way which breaches any applicable local, national or international law \n\n\tUse the Software for any purpose that Traveller Singapore considers is a breach of this EULA agreement \n\n\tIntellectual Property and Ownership \n\n\tTraveller Singapore shall at all times retain ownership of the Software as originally downloaded by you and all subsequent downloads of the Software by you. The Software (and the copyright, and other intellectual property rights of whatever nature in the Software, including any modifications made thereto) are and shall remain the property of Traveller Singapore.</string>
+    <string name="eula_p10">Traveller Singapore reserves the right to grant licences to use the Software to third parties.</string>
+    <string name="eula_subtitle3">Termination</string>
+    <string name="eula_p11">This EULA agreement is effective from the date you first use the Software and shall continue until terminated. You may terminate it at any time upon written notice to Traveller Singapore.</string>
+    <string name="eula_p12">It will also terminate immediately if you fail to comply with any term of this EULA agreement. Upon such termination, the licenses granted by this EULA agreement will immediately terminate and you agree to stop all access and use of the Software. The provisions that by their nature continue and survive will survive any termination of this EULA agreement.</string>
+    <string name="eula_subtitle4">Governing Law</string>
+    <string name="eula_p13">This EULA agreement, and any dispute arising out of or in connection with this EULA agreement, shall be governed by and construed in accordance with the laws of sg.</string>
+    <string name="eula_register_agreement">By registering, you are agreeing to our</string>
+    <string name="eula_agreement"><u>EULA Agreement</u></string>
+    <string name="eula_login_agreement">By logging in, you are agreeing to our</string>
+    <string name="wait_submitting">Please wait while the app submitting booking</string>
+    <string name="wait_scanning">Please wait while the app scanning</string>
+
+    <!--Dialog Alert-->
+    <string name="scanning_option">Scanning Option</string>
+    <string name="scanning_alert">You are about to complete your details, do you want to fill it in automatically by scanning your ID Card?</string>
+    <string name="delete_all_dialog">Are you sure want to delete all?</string>
+    <string name="delete">delete</string>
+    <string name="delete_it_dialog">Are you sure want to delete this booking?</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--When all the edit text are filled with text-->
+    <item android:state_pressed="true">
+        <shape>
+            <solid android:color="@color/customColorNeutral50"/>
+            <corners android:radius="38dp"/>
+            <padding android:left="4dp" android:right="4dp"/>
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <solid android:color="@color/customColorNeutral50"/>
+            <corners android:radius="40dp"/>
+            <padding android:left="4dp" android:right="4dp"/>
+        </shape>
+    </item>
+</selector>
