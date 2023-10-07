@@ -1,0 +1,35 @@
+{
+    "image": "testing/gambar_0001.jpg",
+    "class": {
+        "NIK": {
+            "Xmin": 117,
+            "Ymin": 89,
+            "Xmax": 392,
+            "Ymax": 135
+        },
+        "name": {
+            "Xmin": 136,
+            "Ymin": 150,
+            "Xmax": 228,
+            "Ymax": 174
+        },
+        "sex": {
+            "Xmin": 136,
+            "Ymin": 205,
+            "Xmax": 216,
+            "Ymax": 229
+        },
+        "married": {
+            "Xmin": 133,
+            "Ymin": 398,
+            "Xmax": 250,
+            "Ymax": 419
+        },
+        "nationality": {
+            "Xmin": 132,
+            "Ymin": 453,
+            "Xmax": 168,
+            "Ymax": 475
+        }
+    }
+}

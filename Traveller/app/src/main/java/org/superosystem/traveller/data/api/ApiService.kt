@@ -30,7 +30,7 @@ const val FLIGHT_BOOKING = "flights/booking"
 const val FLIGHT_BOOKING_UPDATE = "flights/booking/{id}"
 const val DEPARTURE_QUERY = "departure"
 const val DESTINATION_QUERY = "destination"
-const val KTP_SCANIDCARD_ENDPOINT = "/ktp"
+const val KTP_SCANIDCARD_ENDPOINT = "ktp"
 const val KTP_RESULT_ENDPOINT = "ktpresult"
 
 interface ApiService {

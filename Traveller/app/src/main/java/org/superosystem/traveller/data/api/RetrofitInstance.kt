@@ -7,7 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-const val BASE_URL = "https://0035-103-191-218-211.ngrok-free.app/"
+const val BASE_URL = "https://8451-103-191-218-211.ngrok-free.app/"
 const val TIME_OUT = 120L
 
 class RetrofitInstance {

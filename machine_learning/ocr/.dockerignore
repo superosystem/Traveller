@@ -1,0 +1,18 @@
+# Ignore
+result2
+misc
+result
+.DS_Store
+environment.yml
+Dockerfile
+command/demo2.py
+command/demo.py
+.gitignore
+command/create_lmdb_dataset.py
+test.py
+README.md
+.dockerignore
+command/train.py
+decode_log.txt
+command/generate_annotations.py
+/command/create_lmdb_dataset.py

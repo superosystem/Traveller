@@ -58,7 +58,9 @@ jspm_packages/
 
 # storage
 ktp/
-src/api/users/images
+src/users/images
 traveller
 
 serviceAccountKey.json
+
+__env__
